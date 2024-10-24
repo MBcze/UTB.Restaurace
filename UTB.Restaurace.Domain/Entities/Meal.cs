@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UTB.Restaurace.Domain.Entities
 {
+    [Table(nameof(Meal))]
     public class Meal : Entity<int>
     {
         [Required]

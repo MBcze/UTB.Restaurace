@@ -9,6 +9,7 @@ using UTB.Restaurace.Domain.Entities.Interfaces;
 
 namespace UTB.Restaurace.Domain.Entities
 {
+    [Table(nameof(Reservation))]
     public class Reservation : Entity<int>
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
