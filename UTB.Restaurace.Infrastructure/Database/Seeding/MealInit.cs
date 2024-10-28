@@ -21,7 +21,7 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
                 Description = "Křupavý kuřecí řízek podávaný s jemnou bylinkovou omáčkou a čerstvým salátem.",
                 Price = 165.00,
                 ImageSrc = "/img/kureci_rizek.jpg",
-                Category = "snídaně",
+                Category = "hlavní jídlo",
                 Available = true
             });
 
@@ -32,7 +32,7 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
                 Description = "Šťavnatý flank steak, grilovaný na střední propečení, podávaný s bylinkovým máslem.",
                 Price = 250.00,
                 ImageSrc = "/img/flank_steak.jpg",
-                Category = "snídaně",
+                Category = "hlavní jídlo",
                 Available = false
             });
 
