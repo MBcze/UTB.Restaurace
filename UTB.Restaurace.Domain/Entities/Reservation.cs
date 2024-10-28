@@ -12,11 +12,12 @@ namespace UTB.Restaurace.Domain.Entities
     public class Reservation : Entity<int>
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime DateTimeCreated { get; protected set; }
+        public DateTime ReservationTime { get; protected set; }
         [Required]
-        public string ReservationNumber { get; set; }
+        public int ReservationId { get; set; }
         [Required]
         public double TotalPrice { get; set; }
+        public string Status { get; set; }
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
         public IUser<int> User { get; set; }
