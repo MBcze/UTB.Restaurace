@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,28 +17,34 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
             meals.Add(new Meal
             {
                 Id = 1,
-                Name = "Rohlík",
-                Description = "placeholder",
-                Price = 2,
-                ImageSrc = "/img/placeholder.jpg"
+                Name = "Kuřecí řízek v bylinkové omáčce",
+                Description = "Křupavý kuřecí řízek podávaný s jemnou bylinkovou omáčkou a čerstvým salátem.",
+                Price = 165.00,
+                ImageSrc = "/img/kureci_rizek.jpg",
+                Category = "snídaně",
+                Available = true
             });
 
             meals.Add(new Meal
             {
                 Id = 2,
-                Name = "Bageta",
-                Description = "placeholder",
-                Price = 3,
-                ImageSrc = "/img/placeholder.jpg"
+                Name = "Flank Steak",
+                Description = "Šťavnatý flank steak, grilovaný na střední propečení, podávaný s bylinkovým máslem.",
+                Price = 250.00,
+                ImageSrc = "/img/flank_steak.jpg",
+                Category = "snídaně",
+                Available = false
             });
 
             meals.Add(new Meal
             {
                 Id = 3,
-                Name = "Řízek",
-                Description = "placeholder",
-                Price = 8,
-                ImageSrc = "/img/placeholder.jpg"
+                Name = "Vepřové s knedlíkem a zelím",
+                Description = "Tradiční české jídlo s pečeným vepřovým masem, knedlíky a zelím.",
+                Price = 180.00,
+                ImageSrc = "/img/vepro_knedlo_zelo.jpg",
+                Category = "hlavní jídlo",
+                Available = true
             });
 
             return meals;
