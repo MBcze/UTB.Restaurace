@@ -16,6 +16,7 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
 
             meals.Add(new Meal
             {
+                Id = 1,
                 MealId = 1,
                 Name = "Kuřecí řízek v bylinkové omáčce",
                 Description = "Křupavý kuřecí řízek podávaný s jemnou bylinkovou omáčkou a čerstvým salátem.",
@@ -27,6 +28,7 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
 
             meals.Add(new Meal
             {
+                Id = 2,
                 MealId = 2,
                 Name = "Flank Steak",
                 Description = "Šťavnatý flank steak, grilovaný na střední propečení, podávaný s bylinkovým máslem.",
@@ -38,6 +40,7 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
 
             meals.Add(new Meal
             {
+                Id = 3,
                 MealId = 3,
                 Name = "Vepřové s knedlíkem a zelím",
                 Description = "Tradiční české jídlo s pečeným vepřovým masem, knedlíky a zelím.",

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UTB.Restaurace.Infrastructure.Database;
 
@@ -10,9 +11,11 @@ using UTB.Restaurace.Infrastructure.Database;
 namespace UTB.Restaurace.Infrastructure.Migrations
 {
     [DbContext(typeof(RestauraceDbContext))]
-    partial class RestauraceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241028181956_mysql_1.0.2_seeding_meals")]
+    partial class mysql_102_seeding_meals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UTB.Restaurace.Infrastructure.Database;
 
@@ -10,9 +11,11 @@ using UTB.Restaurace.Infrastructure.Database;
 namespace UTB.Restaurace.Infrastructure.Migrations
 {
     [DbContext(typeof(RestauraceDbContext))]
-    partial class RestauraceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241028180215_mysql_1.0.1_seeding_meals")]
+    partial class mysql_101_seeding_meals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,10 +63,10 @@ namespace UTB.Restaurace.Infrastructure.Migrations
                         {
                             Id = 1,
                             Available = true,
-                            Category = "hlavní jídlo",
+                            Category = "snídaně",
                             Description = "Křupavý kuřecí řízek podávaný s jemnou bylinkovou omáčkou a čerstvým salátem.",
                             ImageSrc = "/img/kureci_rizek.jpg",
-                            MealId = 1,
+                            MealId = 0,
                             Name = "Kuřecí řízek v bylinkové omáčce",
                             Price = 165.0
                         },
@@ -71,10 +74,10 @@ namespace UTB.Restaurace.Infrastructure.Migrations
                         {
                             Id = 2,
                             Available = false,
-                            Category = "hlavní jídlo",
+                            Category = "snídaně",
                             Description = "Šťavnatý flank steak, grilovaný na střední propečení, podávaný s bylinkovým máslem.",
                             ImageSrc = "/img/flank_steak.jpg",
-                            MealId = 2,
+                            MealId = 0,
                             Name = "Flank Steak",
                             Price = 250.0
                         },
@@ -85,7 +88,7 @@ namespace UTB.Restaurace.Infrastructure.Migrations
                             Category = "hlavní jídlo",
                             Description = "Tradiční české jídlo s pečeným vepřovým masem, knedlíky a zelím.",
                             ImageSrc = "/img/vepro_knedlo_zelo.jpg",
-                            MealId = 3,
+                            MealId = 0,
                             Name = "Vepřové s knedlíkem a zelím",
                             Price = 180.0
                         });
