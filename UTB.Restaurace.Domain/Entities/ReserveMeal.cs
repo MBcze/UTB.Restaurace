@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UTB.Restaurace.Domain.Entities
 {
+    [Table(nameof(ReserveMeal))]
     public class ReserveMeal : Entity<int>
     {
         [ForeignKey(nameof(Reservation))]
