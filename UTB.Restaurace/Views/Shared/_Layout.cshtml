@@ -7,26 +7,54 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/UTB.Restaurace.styles.css" asp-append-version="true" />
+    <style>
+        /* Přidání stylu pro kulaté tlačítko */
+        .login-button {
+            border-radius: 50%; /* Kulaté rohy */
+            width: 50px; /* Šířka tlačítka */
+            height: 50px; /* Výška tlačítka */
+            font-size: 16px; /* Velikost textu */
+            display: flex; /* Pro centrování textu */
+            justify-content: center; /* Centrovat horizontálně */
+            align-items: center; /* Centrovat vertikálně */
+        }
+
+        /* Styly pro dialogové okno */
+        .dialog {
+            display: none; /* Skryté na začátku */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .dialog-overlay {
+            display: none; /* Skryté na začátku */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+    </style>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">UTB.Restaurace</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <!-- Centrální název restaurace s odkazem na domovskou stránku -->
+                <h1 class="navbar-brand mx-auto">
+                    <a href="@Url.Action("Index", "Home")" style="text-decoration: none; color: black;">UTB.Restaurace</a>
+                </h1>
+
+                <!-- Kulaté tlačítko pro přihlášení -->
+                <button class="btn btn-primary login-button" onclick="showDialog()">Login</button>
             </div>
         </nav>
     </header>
@@ -41,9 +69,41 @@
             &copy; 2024 - UTB.Restaurace - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- Dialogové okno pro přihlášení -->
+    <div class="dialog-overlay" id="dialogOverlay"></div>
+    <div class="dialog" id="loginDialog">
+        <h2>Přihlášení</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br>
+        <label for="password">Heslo:</label>
+        <input type="password" id="password" required>
+        <br>
+        <button class="btn btn-primary" onclick="login()">Přihlásit se</button>
+        <span style="cursor: pointer; color: blue;" onclick="location.href='@Url.Action("Register", "Account")'">Registrovat</span>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function showDialog() {
+            document.getElementById('dialogOverlay').style.display = 'block';
+            document.getElementById('loginDialog').style.display = 'block';
+        }
+
+        function closeDialog() {
+            document.getElementById('dialogOverlay').style.display = 'none';
+            document.getElementById('loginDialog').style.display = 'none';
+        }
+
+        function login() {
+            // Zde bys měl přidat logiku pro přihlášení
+            alert('Přihlášení probíhá...');
+            closeDialog();
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

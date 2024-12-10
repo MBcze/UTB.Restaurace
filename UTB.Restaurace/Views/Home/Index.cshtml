@@ -1,8 +1,115 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Domovská stránka";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container text-center">
+    <h1>@ViewData["Title"]</h1>
+    
+    <div class="row justify-content-center">
+        <!-- První řada (2 čtverce) -->
+        <div class="col-6">
+            <div class="square" onclick="location.href='@Url.Action("List", "Home")'">
+                <img src="~/lib/pizza.jpg" alt="Seznam jídel" class="img-fluid" />
+                <div class="overlay">Seznam jídel</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="square" onclick="location.href='@Url.Action("List", "Home")'">
+                <img src="~/lib/kofola.jpg" alt="Seznam nápojů" class="img-fluid" />
+                <div class="overlay">Seznam nápojů</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center mt-3">
+        <!-- Druhá řada (2 čtverce) -->
+        <div class="col-6">
+            <div class="square" onclick="location.href='@Url.Action("List", "Home")'">
+				<img src="~/lib/rezervace.jpg" alt="Rezervace" class="img-fluid" />
+                <div class="overlay">Rezervace</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="square">
+                <div class="info-box">
+                    <h4>Telefon: 123456789</h4>
+                    <h4>Adresa: Zlín 1, Zlín</h4>
+                    <h4>Otevírací doba: každý den 10:00-22:00</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    body {
+        margin: 0; /* Odstraní výchozí margin */
+        height: 100vh; /* Zajistí, že tělo pokryje celou výšku okna */
+        position: relative; /* Nastavíme pozici pro pseudo-element */
+        overflow: hidden; /* Zabráníme přetečení */
+    }
+
+    body::before {
+        content: ""; /* Musíme přidat obsah, aby pseudo-element fungoval */
+        position: absolute; /* Umožní nám umístit ho přesně */
+        top: 0; /* Umístíme ho na začátek */
+        left: 0; /* Umístíme ho na začátek */
+        right: 0; /* Rozšíříme ho na šířku */
+        bottom: 0; /* Rozšíříme ho na výšku */
+        background-image: url('@Url.Content("~/lib/pozadi.jpg")'); /* Cesta k obrázku */
+        background-size: cover; /* Zajistí, že obrázek pokryje celou plochu */
+        background-position: center; /* Udržuje obrázek uprostřed */
+        background-repeat: no-repeat; /* Zabraňuje opakování obrázku */
+        filter: grayscale(60%); /* Přidá šedý filtr k pozadí */
+        z-index: -1; /* Umístí pseudo-element pod ostatní obsah */
+    }
+
+
+    .square {
+        width: 300px;
+        height: 300px;
+        border: 5px solid black;
+        position: relative;
+        margin: 10px auto;
+        cursor: pointer;
+    }
+
+    .square img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: black;
+        font-size: 20px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .square:hover .overlay {
+        opacity: 1;
+    }
+
+    .info-box {
+        background-color: lightgray;
+        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 5px solid black;
+    }
+</style>
