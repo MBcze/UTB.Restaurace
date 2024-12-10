@@ -5,5 +5,6 @@ namespace UTB.Restaurace.Application.Abstraction
     {
         IList<Meal> Select();
         void Create(Meal meal);
+        bool Delete(int id);
     }
 }

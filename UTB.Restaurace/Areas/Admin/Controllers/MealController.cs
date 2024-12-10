@@ -32,5 +32,16 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
             _mealAppService.Create(meal);
             return RedirectToAction(nameof(MealController.Select));
         }
+
+        public IActionResult Delete(int id)
+        {
+            bool deleted = _mealAppService.Delete(id);
+            if (deleted)
+            {
+                return RedirectToAction(nameof(MealController.Select));
+            }
+            else
+                return NotFound();
+        }
     }
 }

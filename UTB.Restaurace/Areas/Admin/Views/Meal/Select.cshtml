@@ -19,6 +19,7 @@
                     <th scope="col">@nameof(Meal.ImageSrc)</th>
                     <th scope="col">@nameof(Meal.Category)</th>
                     <th scope="col">@nameof(Meal.Available)</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                         <td>@meal.ImageSrc</td>
                         <td>@meal.Category</td>
                         <td>@meal.Available</td>
+                        <td><a asp-action="Delete" asp-route-id="@meal.Id" onclick="return ConfirmDelete();">Delete</a></td>
                     </tr>
                 }
             </tbody>
@@ -42,4 +44,9 @@
     {
         <p>Meals table is empty!</p>
     }
+}
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
 }
