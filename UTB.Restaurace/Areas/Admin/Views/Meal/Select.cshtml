@@ -1,8 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IList<Meal>
 @{
-	ViewData["Title"] = "Meal Administration";
+    ViewData["Title"] = "Meal Administration";
 }
 <h1>@ViewData["Title"]</h1>
 
+<a asp-action="Create">Create Meal</a>
+
+@{
+    if (Model != null && Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">@nameof(Meal.Id)</th>
+                    <th scope="col">@nameof(Meal.Name)</th>
+                    <th scope="col">@nameof(Meal.Description)</th>
+                    <th scope="col">@nameof(Meal.Price)</th>
+                    <th scope="col">@nameof(Meal.ImageSrc)</th>
+                    <th scope="col">@nameof(Meal.Category)</th>
+                    <th scope="col">@nameof(Meal.Available)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; ++i)
+                {
+                    Meal meal = Model[i];
+                    <tr>
+                        <th scope="row">@meal.Id</th>
+                        <td>@meal.Name</td>
+                        <td>@meal.Description</td>
+                        <td>@meal.Price</td>
+                        <td>@meal.ImageSrc</td>
+                        <td>@meal.Category</td>
+                        <td>@meal.Available</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Meals table is empty!</p>
+    }
+}

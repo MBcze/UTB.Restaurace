@@ -16,9 +16,21 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         // GET: /<controller>/
         public IActionResult Select()
         {
-            return View();
             IList<Meal> meals = _mealAppService.Select();
             return View(meals);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Meal meal)
+        {
+            _mealAppService.Create(meal);
+            return RedirectToAction(nameof(MealController.Select));
         }
     }
 }

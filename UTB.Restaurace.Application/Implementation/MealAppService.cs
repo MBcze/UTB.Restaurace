@@ -14,5 +14,10 @@ namespace UTB.Restaurace.Application.Implementation
         {
             return _restauraceDbContext.Meals.ToList();
         }
+        public void Create(Meal meal)
+        {
+            _restauraceDbContext.Meals.Add(meal);
+            _restauraceDbContext.SaveChanges();
+        }
     }
 }
