@@ -17,10 +17,10 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
             meals.Add(new Meal
             {
                 Id = 1,
-                MealId = 1,
+                //MealId = 1,
                 Name = "Kuřecí řízek v bylinkové omáčce",
                 Description = "Křupavý kuřecí řízek podávaný s jemnou bylinkovou omáčkou a čerstvým salátem.",
-                Price = 165.00,
+                Price = 165,
                 ImageSrc = "/img/kureci_rizek.jpg",
                 Category = "hlavní jídlo",
                 Available = true
@@ -29,10 +29,10 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
             meals.Add(new Meal
             {
                 Id = 2,
-                MealId = 2,
+                //MealId = 2,
                 Name = "Flank Steak",
                 Description = "Šťavnatý flank steak, grilovaný na střední propečení, podávaný s bylinkovým máslem.",
-                Price = 250.00,
+                Price = 250,
                 ImageSrc = "/img/flank_steak.jpg",
                 Category = "hlavní jídlo",
                 Available = false
@@ -41,10 +41,10 @@ namespace UTB.Restaurace.Infrastructure.Database.Seeding
             meals.Add(new Meal
             {
                 Id = 3,
-                MealId = 3,
+                //MealId = 3,
                 Name = "Vepřové s knedlíkem a zelím",
                 Description = "Tradiční české jídlo s pečeným vepřovým masem, knedlíky a zelím.",
-                Price = 180.00,
+                Price = 180,
                 ImageSrc = "/img/vepro_knedlo_zelo.jpg",
                 Category = "hlavní jídlo",
                 Available = true

@@ -14,19 +14,19 @@
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Price"></label>
-        <input class="form-control" asp-for="Price">
+        <input class="form-control" asp-for="Price" type="number" step="0.1">
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="ImageSrc">Image Source</label>
         <input class="form-control" asp-for="ImageSrc">
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="Category">Image Source</label>
+        <label class="form-label" asp-for="Category"></label>
         <input class="form-control" asp-for="Category">
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="Available">Image Source</label>
-        <input class="form-control" asp-for="Available">
+        <label class="form-label" asp-for="Available"></label>
+        <input class="form-check-input" asp-for="Available" type="checkbox">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

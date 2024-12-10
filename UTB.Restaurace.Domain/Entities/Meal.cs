@@ -13,7 +13,7 @@ namespace UTB.Restaurace.Domain.Entities
     {
         [Required]
         [StringLength(70)]
-        public int MealId { get; set; }
+        // public int MealId { get; set; }
         public string? Name { get; set; }
 
         public string? Description { get; set; }
