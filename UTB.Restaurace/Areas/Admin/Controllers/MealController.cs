@@ -33,6 +33,18 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
             return RedirectToAction(nameof(MealController.Select));
         }
 
+        [HttpPost]
+        public IActionResult ToggleAvailability(int id, bool available)
+        {
+            var meal = _mealAppService.Select().FirstOrDefault(m => m.Id == id);
+            if (meal != null)
+            {
+                meal.Available = available;
+                _mealAppService.Update(meal);
+            }
+            return RedirectToAction(nameof(Select));
+        }
+
         public IActionResult Delete(int id)
         {
             bool deleted = _mealAppService.Delete(id);

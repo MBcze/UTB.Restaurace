@@ -19,6 +19,20 @@ namespace UTB.Restaurace.Application.Implementation
             _restauraceDbContext.Meals.Add(meal);
             _restauraceDbContext.SaveChanges();
         }
+        public void Update(Meal meal)
+        {
+            var existingMeal = _restauraceDbContext.Meals.FirstOrDefault(m => m.Id == meal.Id);
+            if (existingMeal != null)
+            {
+                existingMeal.Name = meal.Name;
+                existingMeal.Description = meal.Description;
+                existingMeal.Price = meal.Price;
+                existingMeal.ImageSrc = meal.ImageSrc;
+                existingMeal.Category = meal.Category;
+                existingMeal.Available = meal.Available;
+                _restauraceDbContext.SaveChanges(); // Ensure changes are saved
+            }
+        }
         public bool Delete(int id)
         {
             bool deleted = false;
