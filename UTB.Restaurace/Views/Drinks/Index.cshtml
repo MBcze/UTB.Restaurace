@@ -1,0 +1,62 @@
+﻿@model IList<Meal>
+
+@{
+    ViewData["Title"] = "Drinks";
+    var categoryDisplayNames = new Dictionary<string, string>
+    {
+        { "nápoj", "Nápoje" },
+    };
+}
+
+<div class="text-center">
+    <h1 class="display-4">Restaurace Drink Menu</h1>
+</div>
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var category in categoryDisplayNames.Keys)
+    {
+        var itemsInCategory = Model.Where(d => d.Category == category && d.Available).OrderBy(d => d.Name).ToList();
+
+        if (itemsInCategory.Any())
+        {
+            <h1 style="font-size: 64px; font-weight: bold">@categoryDisplayNames[category]</h1>
+            <div>
+                @foreach (var drink in itemsInCategory)
+                {
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <h3>@drink.Name</h3>
+                            <p>@drink.Description</p>
+                            <p>Cena: @drink.Price Kč</p>
+                        </div>
+                        <img src="@drink.ImageSrc" alt="@drink.Name" style="width: 150px; height: auto;" />
+                    </div>
+                }
+            </div>
+        }
+    }
+
+    var unavailableDrinks = Model.Where(d => !d.Available).OrderBy(d => d.Category).ThenBy(d => d.Name).ToList();
+    if (unavailableDrinks.Any())
+    {
+        <h2 style="font-size: 44px; font-weight: 500">Nedostupné Nápoje</h2>
+        <div>
+            @foreach (var drink in unavailableDrinks)
+            {
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: gray;">
+                    <div>
+                        <h3>@drink.Name</h3>
+                        <p>@drink.Description</p>
+                        <p>Cena: @drink.Price Kč</p>
+                    </div>
+                    <img src="@drink.ImageSrc" alt="@drink.Name" style="width: 150px; height: auto; opacity: 0.5;" />
+                </div>
+            }
+        </div>
+    }
+}
+else
+{
+    <p>No drinks available!</p>
+}

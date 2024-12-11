@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "Menu";
+    var categoryDisplayNames = new Dictionary<string, string>
+    {
+        { "polévka", "Polévky" },
+        { "hlavní jídlo", "Hlavní jídla" },
+        { "dezert", "Dezerty" }
+    };
 }
 
 <div class="text-center">
@@ -10,44 +16,47 @@
 
 @if (Model != null && Model.Count > 0)
 {
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            @foreach (var meal in Model)
-            {
-                <div class="mb-5">
-                    <div class="card h-100">
-                        <!-- Meal image -->
-                        <img class="card-img-top" src="@meal.ImageSrc" alt="@meal.Name" style="max-width: 200px; max-height: 200px;" />
-                        <!-- Meal details -->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Meal name -->
-                                <h5 class="fw-bolder">@meal.Name</h5>
-                                <!-- Meal description -->
-                                <p>@meal.Description</p>
-                                <!-- Meal price -->
-                                <p><strong>@meal.Price</strong> CZK</p>
+    @foreach (var category in categoryDisplayNames.Keys)
+    {
+        var itemsInCategory = Model.Where(m => m.Category == category && m.Available).OrderBy(m => m.Name).ToList();
 
-                                <!-- Availability check -->
-                                @if (meal.Available)
-                                {
-                                    <p class="text-success">Available</p>
-                                }
-                                else
-                                {
-                                    <p class="text-danger">Not Available</p>
-                                }
-                            </div>
+        if (itemsInCategory.Any())
+        {
+            <h1 style="font-size: 64px; font-weight: bold">@categoryDisplayNames[category]</h1>
+            <div>
+                @foreach (var meal in itemsInCategory)
+                {
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <h3>@meal.Name</h3>
+                            <p>@meal.Description</p>
+                            <p>Cena: @meal.Price Kč</p>
                         </div>
-                        <!-- Meal actions -->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            
-                        </div>
+                        <img src="@meal.ImageSrc" alt="@meal.Name" style="width: 150px; height: auto;" />
                     </div>
+                }
+            </div>
+        }
+    }
+
+    var unavailableMeals = Model.Where(d => !d.Available).OrderBy(d => d.Category).ThenBy(d => d.Name).ToList();
+    if (unavailableMeals.Any())
+    {
+    <h2 style ="font-size: 44px; font-weight: 500">Nedostupná jídla</h2>
+    <div>
+        @foreach (var meal in Model.Where(m => !m.Available).OrderBy(m => m.Category).ThenBy(m => m.Name))
+        {
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: gray;">
+                <div>
+                    <h3>@meal.Name</h3>
+                    <p>@meal.Description</p>
+                    <p>Cena: @meal.Price Kč</p>
                 </div>
-            }
-        </div>
-    </section>
+                <img src="@meal.ImageSrc" alt="@meal.Name" style="width: 150px; height: auto; opacity: 0.5;" />
+            </div>
+        }
+    </div>
+    }
 }
 else
 {
