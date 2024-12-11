@@ -19,8 +19,4 @@
     <ProjectReference Include="..\UTB.Restaurace.Infrastructure\UTB.Restaurace.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\img\meals\" />
-  </ItemGroup>
-
 </Project>

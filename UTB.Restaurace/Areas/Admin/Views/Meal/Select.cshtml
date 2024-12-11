@@ -31,7 +31,7 @@
                         <td>@meal.Name</td>
                         <td>@meal.Description</td>
                         <td>@meal.Price</td>
-                        <td>@meal.ImageSrc</td>
+                        <td><img src="@meal.ImageSrc" alt="Meal Image" style="max-width: 100px; max-height: 100px;" /></td>
                         <td>@meal.Category</td>
                         <td>@meal.Available</td>
                         <td><a asp-action="Delete" asp-route-id="@meal.Id" onclick="return ConfirmDelete();">Delete</a></td>

@@ -19,4 +19,8 @@
     <ProjectReference Include="..\UTB.Restaurace.Domain\UTB.Restaurace.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
