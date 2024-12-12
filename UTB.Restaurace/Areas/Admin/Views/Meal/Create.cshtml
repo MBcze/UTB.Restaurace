@@ -22,7 +22,12 @@
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Category"></label>
-        <input class="form-control" asp-for="Category">
+        <select class="form-select" asp-for="Category">
+            <option value="hlavní jídlo">Hlavní Jídlo</option>
+            <option value="nápoj">Nápoj</option>
+            <option value="polévka">Polévka</option>
+            <option value="dezert">Dezert</option>
+        </select>
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Available"></label>
