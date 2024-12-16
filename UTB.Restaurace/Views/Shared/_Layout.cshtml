@@ -8,42 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/UTB.Restaurace.styles.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
-    <style>
-        /* Přidání stylu pro kulaté tlačítko */
-        .login-button {
-            border-radius: 50%; /* Kulaté rohy */
-            width: 50px; /* Šířka tlačítka */
-            height: 50px; /* Výška tlačítka */
-            font-size: 16px; /* Velikost textu */
-            display: flex; /* Pro centrování textu */
-            justify-content: center; /* Centrovat horizontálně */
-            align-items: center; /* Centrovat vertikálně */
-        }
 
-        /* Styly pro dialogové okno */
-        .dialog {
-            display: none; /* Skryté na začátku */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-        .dialog-overlay {
-            display: none; /* Skryté na začátku */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-        }
-    </style>
-    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
@@ -51,11 +16,29 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <!-- Centrální název restaurace s odkazem na domovskou stránku -->
                 <h1 class="navbar-brand mx-auto">
-                    <a href="@Url.Action("Index", "Home")" style="text-decoration: none; color: black;">UTB.Restaurace</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" style="text-decoration: none; color: black;">UTB.Restaurace</a>
+
                 </h1>
 
                 <!-- Kulaté tlačítko pro přihlášení -->
-                <button class="btn btn-primary login-button" onclick="showDialog()">Login</button>
+                
+                @{
+                    @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <div class="btn btn-primary login-button"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Login"><i class="bi bi-lock"></i>Login</a></div>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right me-1"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                }
             </div>
         </nav>
     </header>
@@ -72,19 +55,7 @@
         </div>
     </footer>
 
-    <!-- Dialogové okno pro přihlášení -->
-    <div class="dialog-overlay" id="dialogOverlay"></div>
-    <div class="dialog" id="loginDialog">
-        <h2>Přihlášení</h2>
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
-        <br>
-        <label for="password">Heslo:</label>
-        <input type="password" id="password" required>
-        <br>
-        <button class="btn btn-primary" onclick="login()">Přihlásit se</button>
-        <span style="cursor: pointer; color: blue;" onclick="location.href='@Url.Action("Register", "Account")'">Registrovat</span>
-    </div>
+    
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

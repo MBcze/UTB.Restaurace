@@ -77,3 +77,15 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+
+/* Pøidání stylu pro kulaté tlaèítko */
+.login-button {
+    border-radius: 50%; /* Kulaté rohy */
+    width: 50px; /* Šíøka tlaèítka */
+    height: 50px; /* Výška tlaèítka */
+    font-size: 16px; /* Velikost textu */
+    display: flex; /* Pro centrování textu */
+    justify-content: center; /* Centrovat horizontálnì */
+    align-items: center; /* Centrovat vertikálnì */
+    color: white; /* Barva textu */
+}

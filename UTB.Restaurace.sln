@@ -5,11 +5,11 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTB.Restaurace", "UTB.Restaurace\UTB.Restaurace.csproj", "{94023DDC-2D1E-43E3-BBEE-9F22CEDC298B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.Restaurace.Infrastructure", "UTB.Restaurace.Infrastructure\UTB.Restaurace.Infrastructure.csproj", "{5A94BDED-5666-43FB-9F65-213938D986AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTB.Restaurace.Infrastructure", "UTB.Restaurace.Infrastructure\UTB.Restaurace.Infrastructure.csproj", "{5A94BDED-5666-43FB-9F65-213938D986AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.Restaurace.Application", "UTB.Restaurace.Application\UTB.Restaurace.Application.csproj", "{D0B2DB26-4523-4A31-9165-F1FEF5A047FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTB.Restaurace.Application", "UTB.Restaurace.Application\UTB.Restaurace.Application.csproj", "{D0B2DB26-4523-4A31-9165-F1FEF5A047FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.Restaurace.Domain", "UTB.Restaurace.Domain\UTB.Restaurace.Domain.csproj", "{B9459E86-7135-47C8-B364-B2351A128772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTB.Restaurace.Domain", "UTB.Restaurace.Domain\UTB.Restaurace.Domain.csproj", "{B9459E86-7135-47C8-B364-B2351A128772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

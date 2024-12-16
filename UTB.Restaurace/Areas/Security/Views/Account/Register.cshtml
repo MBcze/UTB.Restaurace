@@ -1,0 +1,46 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/login.css" />
+}
+<div id="logreg-forms">
+    <form asp-action="Register" method="post" class="form-signup">
+        <br />
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Register</h1>
+        <br />
+        <hr>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="UserName" type="text" id="user-name" class="form-control" placeholder="Username" autofocus="">
+        <span asp-validation-for="UserName" class="text-danger"></span>
+        <input asp-for="FirstName" type="text" id="first-name" class="form-control" placeholder="First name" autofocus="">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+        <input asp-for="LastName" type="text" id="last-name" class="form-control" placeholder="Last name" autofocus="">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+        <input asp-for="Email" type="email" id="user-email" class="form-control" placeholder="Email address" autofocus="">
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input asp-for="PhoneNumber" type="tel" id="user-phone" class="form-control" placeholder="Phone" autofocus="">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        <input asp-for="Address" type="text" id="user-address" class="form-control" placeholder="Address" autofocus="">
+        <span asp-validation-for="Address" class="text-danger"></span>
+        <br />
+        <input asp-for="PasswordHash" type="password" id="user-pass" class="form-control" placeholder="Password" autofocus="">
+        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+        <input asp-for="RepeatedPassword" type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" autofocus="">
+        <span asp-validation-for="RepeatedPassword" class="text-danger"></span>
+        <br />
+        <div class="text-center">
+            <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+        </div>
+        <br />
+        <br />
+        <hr>
+        <a asp-action="Login" class="btn btn-success btn-block text-white" type="button" id="btn-signin"><i class="fas fa-sign-in-alt"></i> Sign in to Existing Account</a>
+    </form>
+</div>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
