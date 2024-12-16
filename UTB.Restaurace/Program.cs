@@ -3,6 +3,8 @@ using UTB.Restaurace.Infrastructure.Database;
 using UTB.Restaurace.Application.Abstraction;
 using UTB.Restaurace.Application.Implementation;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity;
+using UTB.Restaurace.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,11 @@ builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("MySQL");
 ServerVersion serverVersion = new MySqlServerVersion("8.0.38");
 builder.Services.AddDbContext<RestauraceDbContext>(optionsBuilder => optionsBuilder.UseMySql(connectionString, serverVersion));
+//Configuration for Identity
+builder.Services.AddIdentity<User, Role>()
+     .AddEntityFrameworkStores<RestauraceDbContext>()
+     .AddDefaultTokenProviders();
+
 
 //registrace služeb aplikaèní vrstvy
 builder.Services.AddScoped<IMealAppService, MealAppService>();
@@ -31,6 +38,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

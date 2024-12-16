@@ -7,11 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using UTB.Restaurace.Domain.Entities;
 using UTB.Restaurace.Infrastructure.Database.Seeding;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using UTB.Restaurace.Infrastructure.Identity;
 
 namespace UTB.Restaurace.Infrastructure.Database
 {
-    public class RestauraceDbContext : DbContext
+    public class RestauraceDbContext : IdentityDbContext<User, Role, int>
     {
         public DbSet<Meal> Meals { get; set; }
         public RestauraceDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)

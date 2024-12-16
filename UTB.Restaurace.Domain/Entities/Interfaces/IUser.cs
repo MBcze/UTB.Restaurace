@@ -8,7 +8,7 @@ namespace UTB.Restaurace.Domain.Entities.Interfaces
 {
     public interface IUser<TKey> : IEntity<TKey>
     {
-        int UserId { get; set; }
+        //int UserId { get; set; }
         string? UserName { get; set; }
         string? Email { get; set; }
         string? PhoneNumber { get; set; }
