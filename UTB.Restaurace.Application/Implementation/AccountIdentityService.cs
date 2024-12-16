@@ -22,7 +22,7 @@ namespace UTB.Restaurace.Application.Implementation
         }
         public async Task<bool> Login(LoginViewModel vm)
         {
-            var result = await sigInManager.PasswordSignInAsync(vm.UserName, vm.PasswordHash, true, true);
+            var result = await sigInManager.PasswordSignInAsync(vm.UserName, vm.Password, true, true);
             return result.Succeeded;
         }
         public Task Logout()
@@ -41,7 +41,7 @@ namespace UTB.Restaurace.Application.Implementation
                 Address = vm.Address
             };
             string[] errors = null;
-            var result = await userManager.CreateAsync(user, vm.PasswordHash);
+            var result = await userManager.CreateAsync(user, vm.Password);
             if (result.Succeeded)
             {
                 foreach (var role in roles)

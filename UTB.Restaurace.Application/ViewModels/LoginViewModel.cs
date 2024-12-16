@@ -12,7 +12,7 @@ namespace UTB.Restaurace.Application.ViewModels
         [Required]
         public string? UserName { get; set; }
         [Required]
-        public string? PasswordHash { get; set; }
+        public string? Password { get; set; }
         public bool LoginFailed { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace UTB.Restaurace.Areas.Security.Controllers
                     LoginViewModel loginVM = new LoginViewModel()
                     {
                         UserName = registerVM.UserName,
-                        PasswordHash = registerVM.PasswordHash
+                        Password = registerVM.Password
                     };
                     bool isLogged = await _accountService.Login(loginVM);
                     if (isLogged)
