@@ -2,10 +2,13 @@
 using UTB.Restaurace.Domain.Entities;
 using UTB.Restaurace.Application.Abstraction;
 using UTB.Restaurace.Application.Implementation;
+using Microsoft.AspNetCore.Authorization;
+using UTB.Restaurace.Infrastructure.Identity.enums;
 
 namespace UTB.Restaurace.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Roles.Admin))]
     public class MealController : Controller
     {
         IMealAppService _mealAppService;

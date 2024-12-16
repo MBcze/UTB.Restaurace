@@ -34,6 +34,10 @@
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right me-1"></i> Logout</a></li>
+                                    @if (User.IsInRole(nameof(Roles.Admin)))
+                                    {
+                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Meal" asp-action="Select"><i class="bi bi-box-arrow-right me-1"></i>Meals</a></li>
+                                    }
                                 </ul>
                             </li>
                         </ul>
@@ -51,7 +55,6 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - UTB.Restaurace - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            &copy; 2024 - UTB.Restaurace - <a asp-area="Admin" asp-controller="Meal" asp-action="Select">Meals</a>
         </div>
     </footer>
 
