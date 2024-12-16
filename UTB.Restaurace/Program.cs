@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UTB.Restaurace.Infrastructure.Database;
 using UTB.Restaurace.Application.Abstraction;
 using UTB.Restaurace.Application.Implementation;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,4 +41,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Set the culture to use comma as decimal separator
+var cultureInfo = new CultureInfo("cs-CZ");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 app.Run();

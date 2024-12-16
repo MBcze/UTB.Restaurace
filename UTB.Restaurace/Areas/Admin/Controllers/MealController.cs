@@ -29,8 +29,14 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Meal meal)
         {
+            // Momentalne zakomentovano z duvodu chyby pri desetinnych cisel
+            //if (ModelState.IsValid)
+            //{
             _mealAppService.Create(meal);
             return RedirectToAction(nameof(MealController.Select));
+            //}
+
+            //return View(meal);
         }
 
         [HttpPost]
