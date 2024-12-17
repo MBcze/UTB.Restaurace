@@ -63,23 +63,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        function showDialog() {
-            document.getElementById('dialogOverlay').style.display = 'block';
-            document.getElementById('loginDialog').style.display = 'block';
-        }
-
-        function closeDialog() {
-            document.getElementById('dialogOverlay').style.display = 'none';
-            document.getElementById('loginDialog').style.display = 'none';
-        }
-
-        function login() {
-            // Zde bys měl přidat logiku pro přihlášení
-            alert('Přihlášení probíhá...');
-            closeDialog();
-        }
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
