@@ -1,4 +1,5 @@
-﻿using UTB.Restaurace.Application.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using UTB.Restaurace.Application.Abstraction;
 using UTB.Restaurace.Domain.Entities;
 using UTB.Restaurace.Infrastructure.Database;
 namespace UTB.Restaurace.Application.Implementation
@@ -18,6 +19,10 @@ namespace UTB.Restaurace.Application.Implementation
         {
             _restauraceDbContext.Meals.Add(meal);
             _restauraceDbContext.SaveChanges();
+        }
+        public Meal GetById(int id)
+        {
+            return _restauraceDbContext.Meals.FirstOrDefault(m => m.Id == id);
         }
         public void Update(Meal meal)
         {
