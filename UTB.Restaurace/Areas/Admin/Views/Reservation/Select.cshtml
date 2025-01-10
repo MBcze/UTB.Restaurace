@@ -1,0 +1,35 @@
+﻿@model IList<UTB.Restaurace.Domain.Entities.Reservation>
+
+<h1>Reservations</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Reservation Date</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Id</td>
+                <td>@reservation.ReservationDate</td>
+                <td>@reservation.TotalPrice</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Reservation", new { id = reservation.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Reservation", new { id = reservation.Id })" onclick="return confirm('Are you sure?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script>
+        // Add sorting functionality if necessary
+    </script>
+}

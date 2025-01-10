@@ -49,6 +49,9 @@ builder.Services.AddScoped<IMealAppService, MealAppService>();
 //login a registrace
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 
+//Reservation list
+builder.Services.AddScoped<IReservationAppService, ReservationAppService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
