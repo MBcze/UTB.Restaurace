@@ -16,6 +16,8 @@ namespace UTB.Restaurace.Infrastructure.Database
     public class RestauraceDbContext : IdentityDbContext<User, Role, int>
     {
         public DbSet<Meal> Meals { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<ReserveMeal> ReserveMeals { get; set; }
         public RestauraceDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
@@ -24,6 +26,10 @@ namespace UTB.Restaurace.Infrastructure.Database
             base.OnModelCreating(modelBuilder);
             MealInit mealInit = new MealInit();
             modelBuilder.Entity<Meal>().HasData(mealInit.GetThreeMeals());
+            ReservationInit reservationInit = new ReservationInit();
+            modelBuilder.Entity<Reservation>().HasData(reservationInit.GetReservations());
+            ReserveMealInit reserveMealInit = new ReserveMealInit();
+            modelBuilder.Entity<ReserveMeal>().HasData(reserveMealInit.GetReserveMeals());
 
             //Identity - User and Role initialization
             //roles must be added first

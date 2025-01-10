@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UTB.Restaurace.Infrastructure.Database;
 
@@ -11,9 +12,11 @@ using UTB.Restaurace.Infrastructure.Database;
 namespace UTB.Restaurace.Infrastructure.Migrations
 {
     [DbContext(typeof(RestauraceDbContext))]
-    partial class RestauraceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250110220938_CreateReservationsInit")]
+    partial class CreateReservationsInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

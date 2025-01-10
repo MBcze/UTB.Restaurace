@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UTB.Restaurace.Infrastructure.Database;
 
@@ -11,9 +12,11 @@ using UTB.Restaurace.Infrastructure.Database;
 namespace UTB.Restaurace.Infrastructure.Migrations
 {
     [DbContext(typeof(RestauraceDbContext))]
-    partial class RestauraceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250110215845_CreateReservationAndReserveMeal")]
+    partial class CreateReservationAndReserveMeal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,26 +305,6 @@ namespace UTB.Restaurace.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reservation");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ReservationCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReservationDate = new DateTime(2025, 1, 11, 23, 9, 37, 693, DateTimeKind.Local).AddTicks(1639),
-                            Status = "Confirmed",
-                            TotalPrice = 460.0,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ReservationCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReservationDate = new DateTime(2025, 1, 12, 23, 9, 37, 693, DateTimeKind.Local).AddTicks(1697),
-                            Status = "Pending",
-                            TotalPrice = 450.0,
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("UTB.Restaurace.Domain.Entities.ReserveMeal", b =>
@@ -351,40 +334,6 @@ namespace UTB.Restaurace.Infrastructure.Migrations
                     b.HasIndex("ReservationID");
 
                     b.ToTable("ReserveMeal");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 2,
-                            MealId = 1,
-                            Price = 330.0,
-                            ReservationID = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 1,
-                            MealId = 5,
-                            Price = 220.0,
-                            ReservationID = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 1,
-                            MealId = 2,
-                            Price = 250.0,
-                            ReservationID = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 2,
-                            MealId = 6,
-                            Price = 300.0,
-                            ReservationID = 2
-                        });
                 });
 
             modelBuilder.Entity("UTB.Restaurace.Infrastructure.Identity.Role", b =>
