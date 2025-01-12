@@ -23,8 +23,19 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         // GET: Admin/Users
         public async Task<IActionResult> Select()
         {
-            var users = await _userService.GetAllUsersAsync();  // Retrieve users
-            return View(users);
+            var users = await _userService.GetAllUsersAsync();
+            var nonAdminUsers = new List<User>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userService.GetRolesAsync(user.Id.ToString());
+                if (!roles.Contains("Admin"))
+                {
+                    nonAdminUsers.Add(user);
+                }
+            }
+
+            return View(nonAdminUsers);
         }
 
         // GET: Admin/EditUser/{id}

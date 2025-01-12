@@ -25,6 +25,16 @@ namespace UTB.Restaurace.Application.Implementation
             return await _userManager.Users.ToListAsync();
         }
 
+        public async Task<IList<string>> GetRolesAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                return await _userManager.GetRolesAsync(user);
+            }
+            return new List<string>();
+        }
+
         // Get user by id
         public async Task<User> GetUserByIdAsync(string userId)
         {
