@@ -28,6 +28,34 @@ body {
     justify-content: center;
 }
 
+/* Light Theme (Default) */
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+    body.light-theme header,
+    body.light-theme footer,
+    .dropdown-menu
+    .dropdown-item {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+    body.dark-theme header,
+    body.dark-theme footer,
+    .dropdown-menu
+    .dropdown-item {
+        background-color: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+
 
 
 .navbar {
