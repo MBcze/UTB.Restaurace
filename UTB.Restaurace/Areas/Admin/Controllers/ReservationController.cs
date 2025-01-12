@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UTB.Restaurace.Application.Abstraction;
-using UTB.Restaurace.Application.Implementation;
 using Microsoft.AspNetCore.Authorization;
 using UTB.Restaurace.Infrastructure.Identity.enums;
+using UTB.Restaurace.Domain.Entities;
+using UTB.Restaurace.Application.Implementation;
 
 namespace UTB.Restaurace.Areas.Admin.Controllers
 {
@@ -54,6 +55,44 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
 
             // Return the sorted list of reservations
             return View(reservations);
+        }
+
+        // GET: Admin/Reservation/Edit/5
+        public IActionResult Edit(int id)
+        {
+            var reservation = _reservationAppService.GetById(id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+            return View(reservation);
+        }
+
+        // POST: Admin/Reservation/Edit/5
+        [HttpPost]
+        public IActionResult Edit(int id, Reservation reservation)
+        {
+            if (id != reservation.Id)
+            {
+                return BadRequest();
+            }
+
+            _reservationAppService.Update(reservation);
+            return RedirectToAction(nameof(Select));
+        }
+
+        // DELETE: Admin/Reservation/Delete/5
+        public IActionResult Delete(int id)
+        {
+            bool deleted = _reservationAppService.Delete(id);
+            if (deleted)
+            {
+                return RedirectToAction(nameof(Select));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

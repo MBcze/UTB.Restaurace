@@ -1,6 +1,7 @@
 ﻿@model IList<UTB.Restaurace.Domain.Entities.Reservation>
 
 <h1>Reservations</h1>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <table class="table">
     <thead>
@@ -19,8 +20,14 @@
                 <td>@reservation.ReservationDate</td>
                 <td>@reservation.TotalPrice</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Reservation", new { id = reservation.Id })">Edit</a> |
-                    <a href="@Url.Action("Delete", "Reservation", new { id = reservation.Id })" onclick="return confirm('Are you sure?');">Delete</a>
+                    <div class="button-group">
+                        <a asp-action="Delete" asp-route-id="@reservation.Id" onclick="return ConfirmDelete();" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@reservation.Id" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </div>
                 </td>
             </tr>
         }
@@ -29,7 +36,19 @@
 
 @section Scripts
 {
+        <script src="~/js/dialogs.js"></script>
     <script>
         // Add sorting functionality if necessary
     </script>
+}
+
+@section Styles {
+    <style>
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 }
