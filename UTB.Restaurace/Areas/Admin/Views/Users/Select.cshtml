@@ -1,0 +1,73 @@
+﻿@model IEnumerable<User>
+
+<h1>Manage Users</h1>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Address</td>
+                    <td>
+                        <div class="button-group">
+                            <a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </div>
+                    </td>
+@*                     <td>
+                        <a href="@Url.Action("Edit", new { id = user.Id })" class="btn btn-warning">Edit</a>
+                        <form action="@Url.Action("DeleteUser", new { id = user.Id })" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No users found.</p>
+}
+
+@section Scripts
+                        {
+    <script src="~/js/dialogs.js"></script>
+    <script>
+        // Add sorting functionality if necessary
+    </script>
+}
+
+@section Styles {
+    <style>
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+}

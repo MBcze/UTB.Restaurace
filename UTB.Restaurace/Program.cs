@@ -52,6 +52,9 @@ builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 //Reservation list
 builder.Services.AddScoped<IReservationAppService, ReservationAppService>();
 
+//User list
+builder.Services.AddScoped<IUserService, UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
