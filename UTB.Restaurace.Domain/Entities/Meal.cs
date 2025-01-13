@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
+using UTB.Restaurace.Domain.Validations;
 
 namespace UTB.Restaurace.Domain.Entities
 {
@@ -14,8 +15,10 @@ namespace UTB.Restaurace.Domain.Entities
     {
         [Required]
         [StringLength(70)]
+        [FirstLetterCapitalizedCZ]
         public string? Name { get; set; }
 
+        [FirstLetterCapitalizedCZ]
         public string? Description { get; set; }
 
         public double Price { get; set; }

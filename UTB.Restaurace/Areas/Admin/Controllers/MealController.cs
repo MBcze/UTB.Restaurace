@@ -69,10 +69,16 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
             // Momentalne zakomentovano z duvodu chyby pri desetinnych cisel
             //if (ModelState.IsValid)
             //{
-            _mealAppService.Create(meal);
-            return RedirectToAction(nameof(MealController.Select));
+            //_mealAppService.Create(meal);
+            //return RedirectToAction(nameof(MealController.Select));
             //}
+            if (ModelState.IsValid)
+            {
+                _mealAppService.Create(meal);
+                return RedirectToAction(nameof(MealController.Select));
+            }
 
+            return View(meal);
             //return View(meal);
         }
 
