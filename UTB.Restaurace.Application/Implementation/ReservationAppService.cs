@@ -51,8 +51,8 @@ public class ReservationAppService : IReservationAppService
             existingReservation.ReservationDate = reservation.ReservationDate;
             existingReservation.Status = reservation.Status;
             existingReservation.TotalPrice = reservation.TotalPrice;
-           // existingReservation.CustomerName = reservation.CustomerName; // Example: include other fields
-           // existingReservation.NumberOfGuests = reservation.NumberOfGuests; // Example: include more fields if necessary
+            // existingReservation.CustomerName = reservation.CustomerName; // Example: include other fields
+            // existingReservation.NumberOfGuests = reservation.NumberOfGuests; // Example: include more fields if necessary
 
             _restauraceDbContext.SaveChanges(); // Ensure changes are saved
         }
@@ -84,4 +84,20 @@ public class ReservationAppService : IReservationAppService
         return reserveMeals;
     }
 
+    public void Create(Reservation reservation)
+    {
+        _restauraceDbContext.Reservations.Add(reservation);
+        Console.Write($"{reservation.UserName}");
+        _restauraceDbContext.SaveChanges();
+    }
+
+    public void AddReserveMeals(List<ReserveMeal> reserveMeals)
+    {
+        foreach (var reserveMeal in reserveMeals)
+        {
+            _restauraceDbContext.ReserveMeals.Add(reserveMeal);
+            Console.Write($"{reserveMeal.ReservationID},{reserveMeal.MealId},{reserveMeal.Amount},{reserveMeal.Price}");
+            _restauraceDbContext.SaveChanges();
+        }
+    }
 }

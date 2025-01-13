@@ -1,0 +1,54 @@
+﻿@using UTB.Restaurace.Areas.User.Models;
+
+@model UserReservationModel
+
+@{
+    ViewData["Title"] = "Create Reservation";
+
+
+
+    var today = DateTime.Now.Date.AddHours(10).ToString("yyyy-MM-ddTHH:mm");
+}
+
+<h2>Create Reservation</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label asp-for="Reservation.ReservationDate" class="control-label"></label>
+        <input asp-for="Reservation.ReservationDate" class="form-control" value="@today" />
+    </div>
+    <h3>Available Meals</h3>
+    <div class="d-flex flex-wrap">
+        @for (int i = 0; i < Model.AvailableMeals.Count; i++)
+
+
+
+        {
+            <div class="p-2" style="flex: 1 0 30%;">
+                <div class="meal-card" style="width: 300px; height: 400px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #ccc; padding: 10px; box-sizing: border-box;">
+                    <div>
+                        <img src="@Model.AvailableMeals[i].Image" alt="@Model.AvailableMeals[i].Name" style="max-width: 100%; max-height: 150px; object-fit: cover;" />
+                    </div>
+                    <div>
+                        <label>@Model.AvailableMeals[i].Name (@Model.AvailableMeals[i].Description) - @Model.AvailableMeals[i].Price Kč</label>
+                    </div>
+                    <div>
+                        <input type="hidden" asp-for="AvailableMeals[i].MealId" />
+                        <input type="hidden" asp-for="AvailableMeals[i].Name" />
+                        <input type="hidden" asp-for="AvailableMeals[i].Description" />
+                        <input type="hidden" asp-for="AvailableMeals[i].Price" />
+                        <input type="number" asp-for="AvailableMeals[i].Amount" class="form-control" placeholder="Amount" style="margin-top: auto;" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+@section Scripts {
+    @* await Html.RenderPartialAsync("_ValidationScriptsPartial"); *@
+}

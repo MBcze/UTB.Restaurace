@@ -24,7 +24,7 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         public async Task<IActionResult> Select(string sortColumn, string sortDirection)
         {
             var users = await _userService.GetAllUsersAsync();
-            var nonAdminUsers = new List<User>();
+            var nonAdminUsers = new List<UTB.Restaurace.Infrastructure.Identity.User>();
 
             foreach (var user in users)
             {
@@ -70,7 +70,7 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
 
         // POST: Admin/EditUser/{id}
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, User model)
+        public async Task<IActionResult> Edit(string id, UTB.Restaurace.Infrastructure.Identity.User model)
         {
             if (id != model.Id.ToString())
             {
