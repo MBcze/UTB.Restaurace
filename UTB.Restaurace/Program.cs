@@ -42,6 +42,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<IFileUploadService, FileUploadService>(serviceProvider => new FileUploadService(serviceProvider.GetService<IWebHostEnvironment>().WebRootPath));
+
 //registrace služeb aplikaèní vrstvy
 builder.Services.AddScoped<IMealAppService, MealAppService>();
 

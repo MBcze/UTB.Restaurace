@@ -7,9 +7,11 @@ namespace UTB.Restaurace.Application.Implementation
     public class MealAppService : IMealAppService
     {
         RestauraceDbContext _restauraceDbContext;
-        public MealAppService(RestauraceDbContext restauraceDbContext)
+        IFileUploadService _fileUploadService;
+        public MealAppService(RestauraceDbContext restauraceDbContext, IFileUploadService fileUploadService)
         {
             _restauraceDbContext = restauraceDbContext;
+            _fileUploadService = fileUploadService;
         }
         public IList<Meal> Select()
         {
@@ -17,6 +19,17 @@ namespace UTB.Restaurace.Application.Implementation
         }
         public void Create(Meal meal)
         {
+            if (meal.Image != null && meal.Category != "nápoj")
+            {
+                string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine("img", "meals"));
+                meal.ImageSrc = imageSrc;
+            }
+            else if (meal.Image != null && meal.Category == "nápoj")
+            {
+                string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine("img", "drinks"));
+                meal.ImageSrc = imageSrc;
+            }
+
             _restauraceDbContext.Meals.Add(meal);
             _restauraceDbContext.SaveChanges();
         }

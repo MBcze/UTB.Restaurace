@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace UTB.Restaurace.Domain.Entities
 {
@@ -21,6 +22,8 @@ namespace UTB.Restaurace.Domain.Entities
 
         public string? ImageSrc { get; set; }
 
+        [NotMapped]
+        public IFormFile? Image { get; set; }
 
         public string? Category { get; set; }
 
