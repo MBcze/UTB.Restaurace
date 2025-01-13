@@ -66,12 +66,6 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Meal meal)
         {
-            // Momentalne zakomentovano z duvodu chyby pri desetinnych cisel
-            //if (ModelState.IsValid)
-            //{
-            //_mealAppService.Create(meal);
-            //return RedirectToAction(nameof(MealController.Select));
-            //}
             if (ModelState.IsValid)
             {
                 _mealAppService.Create(meal);
@@ -79,7 +73,6 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
             }
 
             return View(meal);
-            //return View(meal);
         }
 
         // GET: Meal/Edit/5

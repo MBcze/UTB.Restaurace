@@ -40,18 +40,38 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
                         ? reservations.OrderBy(r => r.Id).ToList()
                         : reservations.OrderByDescending(r => r.Id).ToList();
                     break;
+                case "ReservationCreationTime":
+                    reservations = sortDirection == "asc"
+                        ? reservations.OrderBy(r => r.ReservationCreationTime).ToList()
+                        : reservations.OrderByDescending(r => r.ReservationCreationTime).ToList();
+                    break;
                 case "ReservationDate":
                     reservations = sortDirection == "asc"
                         ? reservations.OrderBy(r => r.ReservationDate).ToList()
                         : reservations.OrderByDescending(r => r.ReservationDate).ToList();
+                    break;
+                case "Status":
+                    reservations = sortDirection == "asc"
+                        ? reservations.OrderBy(r => r.Status).ToList()
+                        : reservations.OrderByDescending(r => r.Status).ToList();
                     break;
                 case "TotalPrice":
                     reservations = sortDirection == "asc"
                         ? reservations.OrderBy(r => r.TotalPrice).ToList()
                         : reservations.OrderByDescending(r => r.TotalPrice).ToList();
                     break;
+                case "UserId":
+                    reservations = sortDirection == "asc"
+                        ? reservations.OrderBy(r => r.UserId).ToList()
+                        : reservations.OrderByDescending(r => r.UserId).ToList();
+                    break;
+                case "UserName":
+                    reservations = sortDirection == "asc"
+                        ? reservations.OrderBy(r => r.UserName).ToList()
+                        : reservations.OrderByDescending(r => r.UserName).ToList();
+                    break;
                 default:
-                    reservations = reservations.OrderBy(r => r.Id).ToList(); // Default sorting by Id if no column is provided
+                    reservations = reservations.OrderBy(r => r.Id).ToList();
                     break;
             }
 
