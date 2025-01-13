@@ -45,7 +45,16 @@ namespace UTB.Restaurace.Application.Implementation
                 existingMeal.Name = meal.Name;
                 existingMeal.Description = meal.Description;
                 existingMeal.Price = meal.Price;
-                existingMeal.ImageSrc = meal.ImageSrc;
+                if (meal.Image != null && meal.Category != "nápoj")
+                {
+                    string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine("img", "meals"));
+                    meal.ImageSrc = imageSrc;
+                }
+                else if (meal.Image != null && meal.Category == "nápoj")
+                {
+                    string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine("img", "drinks"));
+                    meal.ImageSrc = imageSrc;
+                }
                 existingMeal.Category = meal.Category;
                 existingMeal.Available = meal.Available;
                 _restauraceDbContext.SaveChanges(); // Ensure changes are saved
