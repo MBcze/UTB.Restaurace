@@ -23,6 +23,12 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         {
             var reservations = _reservationAppService.Select();
 
+            // Načteme rezervovaná jídla pro každou rezervaci
+            foreach (var reservation in reservations)
+            {
+                reservation.ReserveMeals = _reservationAppService.GetReserveMealsByReservationId(reservation.Id);
+            }
+
             // Default sorting direction if not provided
             sortDirection = sortDirection ?? "asc";
 
@@ -48,6 +54,7 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
                     reservations = reservations.OrderBy(r => r.Id).ToList(); // Default sorting by Id if no column is provided
                     break;
             }
+
 
             // Pass the sort column and direction to the view for generating the sortable links
             ViewData["CurrentSort"] = sortColumn;
@@ -93,6 +100,19 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+        }
+
+        // GET: Admin/Reservation/GetReserveMealsByReservationId/{reservationId}
+        [HttpGet]
+        public IActionResult GetReserveMealsByReservationId(int id)
+        {
+            var reserveMeals = _reservationAppService.GetReserveMealsByReservationId(id);
+            if (reserveMeals == null || !reserveMeals.Any())
+            {
+                return NotFound(); // Vrací 404, pokud nejsou nalezeny žádné položky
+            }
+
+            return Json(reserveMeals);
         }
     }
 }

@@ -7,8 +7,13 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Creation Date</th>
             <th>Reservation Date</th>
+            <th>Status</th>
             <th>Total Price</th>
+            <th>UserID</th>
+            <th>User Name</th>
+            <th>ReservedMeals</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -17,8 +22,23 @@
         {
             <tr>
                 <td>@reservation.Id</td>
+                <td>@reservation.ReservationCreationTime</td>
                 <td>@reservation.ReservationDate</td>
+                <td>@reservation.Status</td>
                 <td>@reservation.TotalPrice</td>
+                <td>@reservation.UserId</td>
+                <td>@reservation.UserName</td>
+
+                <td>
+                    <!-- Zobrazení rezervovaných jídel pro tuto rezervaci -->
+                    <ul>
+                        @foreach (var reserveMeal in reservation.ReserveMeals)
+                        {
+                            <li>Meal ID: @reserveMeal.MealId  - Name: @reserveMeal.Meal.Name - Amount: @reserveMeal.Amount - Price: @reserveMeal.Price</li>
+                        }
+                    </ul>
+                </td>
+
                 <td>
                     <div class="button-group">
                         <a asp-action="Delete" asp-route-id="@reservation.Id" onclick="return ConfirmDelete();" class="btn btn-danger btn-sm">
@@ -38,8 +58,9 @@
 {
         <script src="~/js/dialogs.js"></script>
     <script>
-        // Add sorting functionality if necessary
+        // pridani scriptu pokud je potreba
     </script>
+
 }
 
 @section Styles {

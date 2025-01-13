@@ -36,5 +36,9 @@ namespace UTB.Restaurace.Domain.Entities
         [ForeignKey("UserId")]
         public int UserId { get; set; }
         public IList<ReserveMeal> ReserveMeals { get; set; }
+
+        // Nová vlastnost pro jméno uživatele
+        [NotMapped] // Tato vlastnost nebude mapována do databáze
+        public string UserName { get; set; }
     }
 }

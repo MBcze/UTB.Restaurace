@@ -6,4 +6,5 @@ public interface IReservationAppService
     Reservation GetById(int id);
     void Update(Reservation reservation);
     bool Delete(int id);
+    IList<ReserveMeal> GetReserveMealsByReservationId(int reservationId);
 }

@@ -3,20 +3,38 @@ using UTB.Restaurace.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using UTB.Restaurace.Infrastructure.Database;
+using Microsoft.AspNetCore.Identity;
+using UTB.Restaurace.Infrastructure.Identity;
 
 public class ReservationAppService : IReservationAppService
 {
     private readonly RestauraceDbContext _restauraceDbContext;
+    private readonly UserManager<User> _userManager;
 
-    public ReservationAppService(RestauraceDbContext restauraceDbContext)
+    public ReservationAppService(RestauraceDbContext restauraceDbContext, UserManager<User> userManager)
     {
         _restauraceDbContext = restauraceDbContext;
+        _userManager = userManager;
     }
 
     public IList<Reservation> Select()
     {
-        // Vrátí všechny rezervace z databáze
-        return _restauraceDbContext.Reservations.ToList();
+        // Načteme všechny rezervace
+        var reservations = _restauraceDbContext.Reservations.ToList();
+
+        // Pro každou rezervaci načteme uživatelské jméno
+        foreach (var reservation in reservations)
+        {
+            // Načteme uživatelské jméno podle UserId
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == reservation.UserId);
+            if (user != null)
+            {
+                // Uložení uživatelského jména přímo do rezervace
+                reservation.UserName = user.UserName;
+            }
+        }
+
+        return reservations;
     }
 
     public Reservation GetById(int id)
@@ -29,7 +47,9 @@ public class ReservationAppService : IReservationAppService
         var existingReservation = _restauraceDbContext.Reservations.FirstOrDefault(r => r.Id == reservation.Id);
         if (existingReservation != null)
         {
+
             existingReservation.ReservationDate = reservation.ReservationDate;
+            existingReservation.Status = reservation.Status;
             existingReservation.TotalPrice = reservation.TotalPrice;
            // existingReservation.CustomerName = reservation.CustomerName; // Example: include other fields
            // existingReservation.NumberOfGuests = reservation.NumberOfGuests; // Example: include more fields if necessary
@@ -52,4 +72,16 @@ public class ReservationAppService : IReservationAppService
         }
         return deleted;
     }
+
+    public IList<ReserveMeal> GetReserveMealsByReservationId(int reservationId)
+    {
+        // Získání rezervovaných jídel pro danou rezervaci
+        var reserveMeals = _restauraceDbContext.ReserveMeals
+            .Where(rm => rm.ReservationID == reservationId)
+            .Include(rm => rm.Meal)  // Zahrnutí jídla (Meal) do výsledků
+            .ToList();
+
+        return reserveMeals;
+    }
+
 }
