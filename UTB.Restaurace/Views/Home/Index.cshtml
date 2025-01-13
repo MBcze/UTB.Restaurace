@@ -50,14 +50,18 @@
             left: 0; /* Umístíme ho na začátek */
             right: 0; /* Rozšíříme ho na šířku */
             bottom: 0; /* Rozšíříme ho na výšku */
-            background-color: rgb(240, 240, 240);
-            ; /* Barva pozadí */
-            /*background-image: url('@Url.Content("~/lib/pozadi.jpg")'); /* Cesta k obrázku */
-            background-size: cover; /* Zajistí, že obrázek pokryje celou plochu */
-            background-position: center; /* Udržuje obrázek uprostřed */
-            /*background-repeat: no-repeat; /* Zabraňuje opakování obrázku */
-            filter: grayscale(60%); /* Přidá šedý filtr k pozadí */
-            z-index: -1; /* Umístí pseudo-element pod ostatní obsah */
+        }
+
+        /* Light Theme (Default) */
+        body.light-theme {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #1a1a1a;
+            color: #ffffff;
         }
 
     .square {

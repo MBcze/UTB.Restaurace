@@ -21,10 +21,14 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="Image">Image</label>
-        <input id="File" class="form-control-file" asp-for="Image">
+        <label class="form-label" for="File">Upload Image</label>
+        <input id="File" class="form-control-file" asp-for="Image" style="display:none;" onchange="updateFileName()" />
+        <label for="File" class="custom-file-label" id="file-label">
+            <i class="bi bi-upload me-2"></i> Choose a file
+        </label>
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
         <label class="form-label" asp-for="Category"></label>
         <select class="form-select" asp-for="Category">
@@ -47,4 +51,16 @@
     <script src="~/js/Validations/PriceValidation.js"></script>
     <script src="~/js/validations/FirstLetterCapitalizedCZ.js"></script>
     <script src="~/js/Validations/FileContentValidation.js"></script>
+    <script>
+        function updateFileName() {
+            var fileInput = document.getElementById("File");
+            var fileLabel = document.getElementById("file-label");
+
+            // Get the file name from the file input
+            var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "Choose a file";
+
+            // Update the label text with the file name
+            fileLabel.textContent = fileName;
+        }
+    </script>
 }
