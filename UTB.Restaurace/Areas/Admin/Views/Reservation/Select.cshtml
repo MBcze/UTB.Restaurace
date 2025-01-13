@@ -6,14 +6,49 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Creation Date</th>
-            <th>Reservation Date</th>
-            <th>Status</th>
-            <th>Total Price</th>
-            <th>UserID</th>
-            <th>User Name</th>
-            <th>ReservedMeals</th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="Id" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "Id" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    ID
+                    <i class="bi @(ViewData["CurrentSort"] as string == "Id" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="ReservationCreationTime" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "ReservationCreationTime" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    Creation Date
+                    <i class="bi @(ViewData["CurrentSort"] as string == "ReservationCreationTime" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="ReservationDate" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "ReservationDate" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    Reservation Date
+                    <i class="bi @(ViewData["CurrentSort"] as string == "ReservationDate" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="Status" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "Status" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    Status
+                    <i class="bi @(ViewData["CurrentSort"] as string == "Status" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="TotalPrice" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "TotalPrice" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    Total Price
+                    <i class="bi @(ViewData["CurrentSort"] as string == "TotalPrice" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="UserId" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "UserId" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    User ID
+                    <i class="bi @(ViewData["CurrentSort"] as string == "UserId" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>
+                <a asp-action="Select" asp-route-sortColumn="UserName" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "UserName" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                    User Name
+                    <i class="bi @(ViewData["CurrentSort"] as string == "UserName" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                </a>
+            </th>
+            <th>Reserved Meals</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,7 +56,7 @@
         @foreach (var reservation in Model)
         {
             <tr>
-                <td>@reservation.Id</td>
+                <th>@reservation.Id</th>
                 <td>@reservation.ReservationCreationTime</td>
                 <td>@reservation.ReservationDate</td>
                 <td>@reservation.Status</td>
@@ -56,20 +91,9 @@
 
 @section Scripts
 {
-        <script src="~/js/dialogs.js"></script>
-    <script>
-        // pridani scriptu pokud je potreba
-    </script>
-
+    <script src="~/js/dialogs.js"></script>
 }
 
 @section Styles {
-    <style>
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/admin-select.css" />
 }

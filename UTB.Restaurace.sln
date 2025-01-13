@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTB.Restaurace.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UTB.Restaurace.Domain", "UTB.Restaurace.Domain\UTB.Restaurace.Domain.csproj", "{B9459E86-7135-47C8-B364-B2351A128772}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.Restaurace.Tests", "UTB.Restaurace.Tests\UTB.Restaurace.Tests.csproj", "{184B7214-C52C-4209-84CF-47D136CC4846}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B9459E86-7135-47C8-B364-B2351A128772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9459E86-7135-47C8-B364-B2351A128772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9459E86-7135-47C8-B364-B2351A128772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184B7214-C52C-4209-84CF-47D136CC4846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184B7214-C52C-4209-84CF-47D136CC4846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184B7214-C52C-4209-84CF-47D136CC4846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184B7214-C52C-4209-84CF-47D136CC4846}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

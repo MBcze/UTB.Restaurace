@@ -17,8 +17,7 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <!-- Centrální název restaurace s odkazem na domovskou stránku -->
                 <h1 class="navbar-brand mx-auto">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" style="text-decoration: none;">UTB.Restaurace</a>
-
+                    <a asp-area="" asp-controller="Home" asp-action="Index" style="text-decoration: none;">Restaurace</a>
                 </h1>
 
                 <!-- Kulaté tlačítko pro přihlášení -->
@@ -26,26 +25,31 @@
                 @{
                     @if (User.Identity.IsAuthenticated == false)
                     {
-                        <div class="btn btn-primary login-button"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Login"><i class="bi bi-lock"></i>Login</a></div>
+                        <a class="lbutton nav-link" asp-area="Security" asp-controller="Account" asp-action="Login">
+                            <i class="bi bi-lock"></i> Login
+                        </a>
+                        <button id="theme-toggle" class="lbutton" aria-label="Switch Theme">
+                            <i class="bi bi-moon"></i>
+                        </button>
                     }
                     else
                     {
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
+                                <a class="nav-link dropdown-toggle neco" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right me-1"></i> Logout</a></li>
+                                    @if (User.IsInRole(nameof(Roles.Admin)))
+                                    {
+                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Meal" asp-action="Select"><i class="bi bi-egg-fried me-1"></i> Meals</a></li>
+                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Reservation" asp-action="Select"><i class="bi bi-calendar-check me-1"></i> Reservations</a></li>
+                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Users" asp-action="Select"><i class="bi bi-person-lines-fill me-1"></i> Users</a></li>
+                                    }
                                     <li>
-                                        <button id="theme-toggle" class="btn btn-secondary" aria-label="Switch Theme">
+                                        <button id="theme-toggle" class="lbutton drop" aria-label="Switch Theme">
                                             <i class="bi bi-moon"></i>
                                         </button>
                                     </li>
-                                    @if (User.IsInRole(nameof(Roles.Admin)))
-                                    {
-                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Meal" asp-action="Select"><i class="bi bi-box-arrow-right me-1"></i>Meals</a></li>
-                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Reservation" asp-action="Select"><i class="bi bi-box-arrow-right me-1"></i>Reservations</a></li>
-                                        <li><a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Users" asp-action="Select"><i class="bi bi-box-arrow-right me-1"></i>Users</a></li>
-                                    }
                                 </ul>
                             </li>
                         </ul>

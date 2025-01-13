@@ -21,11 +21,13 @@ namespace UTB.Restaurace.Domain.Entities
         [FirstLetterCapitalizedCZ]
         public string? Description { get; set; }
 
+        [PriceValidation]
         public double Price { get; set; }
 
         public string? ImageSrc { get; set; }
 
         [NotMapped]
+        [FileContent("image")]
         public IFormFile? Image { get; set; }
 
         public string? Category { get; set; }

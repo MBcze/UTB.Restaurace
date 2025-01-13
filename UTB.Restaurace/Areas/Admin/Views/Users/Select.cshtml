@@ -8,11 +8,37 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Email</th>
+                <th>
+                    <a asp-action="Select" asp-route-sortColumn="Id" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "Id" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                        Id
+                        <i class="bi @(ViewData["CurrentSort"] as string == "Id" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Select" asp-route-sortColumn="Username" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "Username" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                        Username
+                        <i class="bi @(ViewData["CurrentSort"] as string == "Username" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Select" asp-route-sortColumn="Email" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "Email" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                        Email
+                        <i class="bi @(ViewData["CurrentSort"] as string == "Email" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                    </a>
+                </th>
                 <th>Phone Number</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>
+                    <a asp-action="Select" asp-route-sortColumn="FirstName" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "FirstName" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                        First Name
+                        <i class="bi @(ViewData["CurrentSort"] as string == "FirstName" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Select" asp-route-sortColumn="LastName" asp-route-sortDirection="@(ViewData["CurrentSort"] as string == "LastName" && ViewData["SortDirection"] as string == "asc" ? "desc" : "asc")">
+                        Last Name
+                        <i class="bi @(ViewData["CurrentSort"] as string == "LastName" ? (ViewData["SortDirection"] as string == "asc" ? "bi-caret-down-fill" : "bi-caret-up-fill") : "bi-caret-right-fill")"></i>
+                    </a>
+                </th>
                 <th>Address</th>
                 <th>Actions</th>
             </tr>
@@ -21,6 +47,7 @@
             @foreach (var user in Model)
             {
                 <tr>
+					<th>@user.Id</th>
                     <td>@user.UserName</td>
                     <td>@user.Email</td>
                     <td>@user.PhoneNumber</td>
@@ -62,12 +89,5 @@ else
 }
 
 @section Styles {
-    <style>
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/admin-select.css" />
 }

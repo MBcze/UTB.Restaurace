@@ -21,7 +21,7 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users
-        public async Task<IActionResult> Select()
+        public async Task<IActionResult> Select(string sortColumn, string sortDirection)
         {
             var users = await _userService.GetAllUsersAsync();
             var nonAdminUsers = new List<User>();
@@ -34,6 +34,25 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
                     nonAdminUsers.Add(user);
                 }
             }
+
+            // Default sorting direction if not provided
+            sortDirection = string.IsNullOrEmpty(sortDirection) ? "asc" : sortDirection;
+
+            // Apply sorting
+            nonAdminUsers = sortColumn switch
+            {
+                "Id" => sortDirection == "asc" ? nonAdminUsers.OrderBy(u => u.Id).ToList() : nonAdminUsers.OrderByDescending(u => u.Id).ToList(),
+                "Username" => sortDirection == "asc" ? nonAdminUsers.OrderBy(u => u.UserName).ToList() : nonAdminUsers.OrderByDescending(u => u.UserName).ToList(),
+                "Email" => sortDirection == "asc" ? nonAdminUsers.OrderBy(u => u.Email).ToList() : nonAdminUsers.OrderByDescending(u => u.Email).ToList(),
+                "FirstName" => sortDirection == "asc" ? nonAdminUsers.OrderBy(u => u.FirstName).ToList() : nonAdminUsers.OrderByDescending(u => u.FirstName).ToList(),
+                "LastName" => sortDirection == "asc" ? nonAdminUsers.OrderBy(u => u.LastName).ToList() : nonAdminUsers.OrderByDescending(u => u.LastName).ToList(),
+                _ => nonAdminUsers.OrderBy(u => u.Id).ToList(), // Default sorting by Id
+            };
+
+            // Pass the sort column and direction to the view for generating sortable links
+            ViewData["CurrentSort"] = sortColumn;
+            ViewData["SortDirection"] = sortDirection;
+
 
             return View(nonAdminUsers);
         }
