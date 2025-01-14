@@ -16,7 +16,10 @@
 
     <div class="mb-3">
         <label asp-for="Status" class="form-label"></label>
-        <input asp-for="Status" class="form-control" />
+        <select class="form-select" asp-for="Status">
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+        </select>
     </div>
 
     <div class="mb-3">
