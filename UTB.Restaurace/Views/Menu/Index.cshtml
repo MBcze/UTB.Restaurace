@@ -8,6 +8,8 @@
         { "hlavní jídlo", "Main Courses" },
         { "dezert", "Desserts" }
     };
+    var unavailableMeals = Model.Where(m => !m.Available).OrderBy(m => m.Name).ToList();
+
 }
 
 <div class="text-center">
@@ -31,7 +33,7 @@
                         <div>
                             <h3>@meal.Name</h3>
                             <p>@meal.Description</p>
-                            <p>Cena: @meal.Price Kč</p>
+                            <p>Price: @meal.Price CZK</p>
                         </div>
                         <img src="@meal.ImageSrc" alt="@meal.Name" style="width: 150px; height: auto;" />
                     </div>
@@ -39,27 +41,32 @@
             </div>
         }
     }
-    @foreach (var category in categoryDisplayNames.Keys)
-    {
-        var unavailableMeals = Model.Where(m => m.Category == category && !m.Available).OrderBy(m => m.Name).ToList();
-        if (unavailableMeals.Any())
+    @if (unavailableMeals.Any()) {
+        <h2 style="font-size: 44px; font-weight: 500">Items that are not available</h2>
+        @foreach (var category in categoryDisplayNames.Keys)
         {
-            <h2 style="font-size: 44px; font-weight: 500">Items that are not available</h2>
-        <div>
-                @foreach (var meal in unavailableMeals)
+            var unavailableMealsWithCat = Model.Where(m => m.Category == category && !m.Available).OrderBy(m => m.Name).ToList();
+            if (unavailableMealsWithCat.Any())
             {
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: gray;">
-                    <div>
-                        <h3>@meal.Name</h3>
-                        <p>@meal.Description</p>
-                        <p>Cena: @meal.Price Kč</p>
-                    </div>
-                    <img src="@meal.ImageSrc" alt="@meal.Name" style="width: 150px; height: auto; opacity: 0.5;" />
+                <h3 style="font-size: 36px; font-weight: 500; margin-top: 20px;">@categoryDisplayNames[category]</h3>
+                <div>
+                    @foreach (var meal in unavailableMealsWithCat)
+                    {
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: gray;">
+                            <div>
+                                <h4>@meal.Name</h4>
+                                <p>@meal.Description</p>
+                                <p>Price: @meal.Price CZK</p>
+                            </div>
+                            <img src="@meal.ImageSrc" alt="@meal.Name" style="width: 150px; height: auto; opacity: 0.5;" />
+                        </div>
+                    }
                 </div>
             }
-        </div>
         }
+
     }
+
 }
 else
 {

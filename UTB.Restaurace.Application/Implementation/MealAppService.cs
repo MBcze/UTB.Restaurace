@@ -45,21 +45,21 @@ namespace UTB.Restaurace.Application.Implementation
                 existingMeal.Name = meal.Name;
                 existingMeal.Description = meal.Description;
                 existingMeal.Price = meal.Price;
-                if (meal.Image != null && meal.Category != "nápoj")
+
+                if (meal.Image != null)
                 {
-                    string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine("img", "meals"));
-                    meal.ImageSrc = imageSrc;
+                    string folder = meal.Category == "nápoj" ? "img/drinks" : "img/meals";
+                    string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine(folder));
+                    existingMeal.ImageSrc = imageSrc;
                 }
-                else if (meal.Image != null && meal.Category == "nápoj")
-                {
-                    string imageSrc = _fileUploadService.FileUpload(meal.Image, Path.Combine("img", "drinks"));
-                    meal.ImageSrc = imageSrc;
-                }
+
                 existingMeal.Category = meal.Category;
                 existingMeal.Available = meal.Available;
-                _restauraceDbContext.SaveChanges(); // Ensure changes are saved
+
+                _restauraceDbContext.SaveChanges();
             }
         }
+
         public bool Delete(int id)
         {
             bool deleted = false;

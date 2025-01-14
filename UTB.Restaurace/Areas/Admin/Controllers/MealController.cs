@@ -94,13 +94,11 @@ namespace UTB.Restaurace.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-
             if (ModelState.IsValid)
             {
                 _mealAppService.Update(meal);
                 return RedirectToAction(nameof(Select));
             }
-
             return View(meal);
         }
 

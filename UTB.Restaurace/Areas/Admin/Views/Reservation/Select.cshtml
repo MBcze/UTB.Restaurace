@@ -3,6 +3,12 @@
 <h1>Manage Reservations</h1>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+@{
+    // Separate reservations into Active and Completed
+    var activeReservations = Model.Where(reservation => reservation.Status != "Completed").OrderBy(r => r.ReservationDate).ToList();
+    var completedReservations = Model.Where(reservation => reservation.Status == "Completed").OrderBy(r => r.ReservationDate).ToList();
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -53,7 +59,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var reservation in Model)
+        @foreach (var reservation in activeReservations)
         {
             <tr>
                 <th>@reservation.Id</th>
@@ -89,6 +95,59 @@
     </tbody>
 </table>
 
+@if (completedReservations.Any())
+{
+    <h2>Completed Reservations</h2>
+    <table class="table dimmed">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Creation Date</th>
+                <th>Reservation Date</th>
+                <th>Status</th>
+                <th>Total Price</th>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Reserved Meals</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in completedReservations)
+            {
+                <tr>
+                    <th>@reservation.Id</th>
+                    <td>@reservation.ReservationCreationTime</td>
+                    <td>@reservation.ReservationDate</td>
+                    <td>@reservation.Status</td>
+                    <td>@reservation.TotalPrice</td>
+                    <td>@reservation.UserId</td>
+                    <td>@reservation.UserName</td>
+                    <td>
+                        <!-- Display reserved meals for this reservation -->
+                        <ul>
+                            @foreach (var reserveMeal in reservation.ReserveMeals)
+                            {
+                                <li>Meal ID: @reserveMeal.MealId - Name: @reserveMeal.Meal.Name - Amount: @reserveMeal.Amount - Price: @reserveMeal.Price</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        <div class="button-group">
+                            <a asp-action="Delete" asp-route-id="@reservation.Id" onclick="return ConfirmDelete();" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@reservation.Id" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @section Scripts
 {
     <script src="~/js/dialogs.js"></script>
@@ -96,4 +155,18 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/admin-select.css" />
+    <style>
+            .text-alignment {
+            text-align: center;
+        }
+
+        /* Dimmed styling for completed reservations */
+        .dimmed {
+            opacity: 0.6;
+        }
+
+            .dimmed td {
+                color: #aaa;
+            }
+    </style>
 }

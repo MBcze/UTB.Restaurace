@@ -16,7 +16,8 @@ namespace UTB.Restaurace.Domain.Validations
         {
             if (value == null)
             {
-                return new ValidationResult($"Image was not selected.");
+                // Allow null if the Image property is optional
+                return ValidationResult.Success;
             }
             else if (value is IFormFile formFile)
             {
@@ -34,6 +35,7 @@ namespace UTB.Restaurace.Domain.Validations
                 throw new NotImplementedException($"The {nameof(FileContentAttribute)} is not implemented for the type: {value.GetType()}");
             }
         }
+
         public void AddValidation(ClientModelValidationContext context)
         {
             if (context.Attributes.ContainsKey("data-val") == false)
