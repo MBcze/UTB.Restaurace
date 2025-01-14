@@ -100,4 +100,22 @@ public class ReservationAppService : IReservationAppService
             _restauraceDbContext.SaveChanges();
         }
     }
+
+    public IList<Reservation> GetUserReservations(int userId)
+    {
+        var reservations = _restauraceDbContext.Reservations
+            .Where(r => r.UserId == userId)
+            .ToList();
+
+        foreach (var reservation in reservations)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == reservation.UserId);
+            if (user != null)
+            {
+                reservation.UserName = user.UserName;
+            }
+        }
+
+        return reservations;
+    }
 }

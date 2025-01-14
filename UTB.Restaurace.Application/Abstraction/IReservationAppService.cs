@@ -9,4 +9,5 @@ public interface IReservationAppService
     IList<ReserveMeal> GetReserveMealsByReservationId(int reservationId);
     void Create(Reservation reservation);
     void AddReserveMeals(List<ReserveMeal> reserveMeals);
+    public IList<Reservation> GetUserReservations(int userId);
 }

@@ -86,5 +86,27 @@ namespace UTB.Restaurace.Areas.User.Controllers
             // Pokud je model neplatný, vraťte stejný model zpět do view
             return View(viewModel);
         }
+
+        public async Task<IActionResult> UserReservations()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var reservations = _reservationAppService.GetUserReservations(user.Id);
+            var reserveMeals = new List<ReserveMeal>();
+
+            foreach (var reservation in reservations)
+            {
+                var meals = _reservationAppService.GetReserveMealsByReservationId(reservation.Id);
+                reserveMeals.AddRange(meals);
+            }
+
+            ViewBag.ReserveMeals = reserveMeals;
+
+            return View(reservations);
+        }
     }
 }

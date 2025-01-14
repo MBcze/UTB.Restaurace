@@ -1,0 +1,64 @@
+﻿@model IList<UTB.Restaurace.Domain.Entities.Reservation>
+
+@{
+    ViewData["Title"] = "My Reservations";
+    var reserveMeals = ViewBag.ReserveMeals as List<UTB.Restaurace.Domain.Entities.ReserveMeal>;
+}
+
+<h2>My Reservations</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Status)
+            </th>
+            <th>
+                Jídla
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => reservation.ReservationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => reservation.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => reservation.Status)
+                </td>
+                <td>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Meal</th>
+                                <th>Quantity</th>
+                                <th>CombinedPrice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var meal in reserveMeals.Where(m => m.ReservationID == reservation.Id))
+                            {
+                                <tr>
+                                    <td>@meal.Meal.Name</td>
+                                    <td>@meal.Amount</td>
+                                    <td>@meal.Price</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
