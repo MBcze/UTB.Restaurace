@@ -457,3 +457,17 @@ body.dark-theme .custom-file-label {
     body.dark-theme .custom-file-label:hover {
         background-color: #135a8e; /* Darker blue on hover */
     }
+
+/* Light Theme */
+body.light-theme .info-box {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Theme */
+body.dark-theme .info-box {
+    background-color: #000000;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+}
