@@ -3,13 +3,13 @@
         <!-- První řada (2 čtverce) -->
         <div class="col-12 col-md-6 col-lg-3">
             <div class="square" onclick="location.href='@Url.Action("Index", "Menu")'">
-                <img src="~/img/meals/pizza.jpg" alt="Meals Menu" class="img-fluid" />
+                <img id="theme-image" src="~/img/icons/MealMenu.png" alt="Meals Menu" class="img-fluid theme-adaptive-image" />
                 <div class="overlay">Meals Menu</div>
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
             <div class="square" onclick="location.href='@Url.Action("Index", "Drinks")'">
-                <img src="~/lib/kofola.jpg" alt="Drinks Menu" class="img-fluid" />
+                <img id="theme-image" src="~/img/icons/DrinksMenu.png" alt="Drinks Menu" class="img-fluid theme-adaptive-image" />
                 <div class="overlay">Drinks Menu</div>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <!-- Druhá řada (2 čtverce) -->
         <div class="col-12 col-md-6 col-lg-3">
                 <div class="square" onclick="location.href='@Url.Action("Create", "UserReservation", new { area = "User" })'">
-                <img src="~/lib/rezervace.jpg" alt="Reservation" class="img-fluid" />
+                <img id="theme-image" src="~/img/icons/Reservation.png" alt="Reservation" class="img-fluid theme-adaptive-image" />
                 <div class="overlay">Reservation</div>
             </div>
         </div>
@@ -110,4 +110,17 @@
         align-items: center;
         text-align: center;
     }
+
+    .theme-adaptive-image {
+        transition: filter 0.3s ease;
+    }
+
+    body.light-theme .theme-adaptive-image {
+        filter: invert(0%);
+    }
+
+    body.dark-theme .theme-adaptive-image {
+        filter: invert(100%);
+    }
+
 </style>
