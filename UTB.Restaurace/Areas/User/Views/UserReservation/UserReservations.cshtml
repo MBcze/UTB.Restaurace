@@ -3,40 +3,31 @@
 @{
     ViewData["Title"] = "My Reservations";
     var reserveMeals = ViewBag.ReserveMeals as List<UTB.Restaurace.Domain.Entities.ReserveMeal>;
+
+    // Separate reservations into Pending/Confirmed and Completed
+    var activeReservations = Model.Where(reservation => reservation.Status != "Completed").OrderBy(reservation => reservation.ReservationDate).ToList();
+    var completedReservations = Model.Where(reservation => reservation.Status == "Completed").OrderBy(reservation => reservation.ReservationDate).ToList();
 }
 
 <h2>My Reservations</h2>
 
+<!-- Active Reservations Table (Pending/Confirmed) -->
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Reservation Date
-            </th>
-            <th class="text-alignment">
-                Total Price
-            </th>
-            <th class="text-alignment">
-                Status
-            </th>
-            <th>
-                Items
-            </th>
+            <th>Reservation Date</th>
+            <th class="text-alignment">Total Price</th>
+            <th class="text-alignment">Status</th>
+            <th>Items</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var reservation in Model)
+        @foreach (var reservation in activeReservations)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => reservation.ReservationDate)
-                </td>
-                <td class="text-alignment">
-                    @Html.DisplayFor(modelItem => reservation.TotalPrice) CZK
-                </td>
-                <td class="text-alignment">
-                    @Html.DisplayFor(modelItem => reservation.Status)
-                </td>
+                <td>@Html.DisplayFor(modelItem => reservation.ReservationDate)</td>
+                <td class="text-alignment">@Html.DisplayFor(modelItem => reservation.TotalPrice) CZK</td>
+                <td class="text-alignment">@Html.DisplayFor(modelItem => reservation.Status)</td>
                 <td>
                     <table class="table">
                         <thead>
@@ -63,11 +54,66 @@
     </tbody>
 </table>
 
+<!-- Completed Reservations Section -->
+@if (completedReservations.Any())
+{
+    <h3>Completed Reservations</h3>
+    <table class="table dimmed">
+        <thead>
+            <tr>
+                <th>Reservation Date</th>
+                <th class="text-alignment">Total Price</th>
+                <th class="text-alignment">Status</th>
+                <th>Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in completedReservations)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => reservation.ReservationDate)</td>
+                    <td class="text-alignment">@Html.DisplayFor(modelItem => reservation.TotalPrice) CZK</td>
+                    <td class="text-alignment">@Html.DisplayFor(modelItem => reservation.Status)</td>
+                    <td>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 55%;">Meal</th>
+                                    <th class="text-alignment">Quantity</th>
+                                    <th class="text-alignment">Combined Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var meal in reserveMeals.Where(m => m.ReservationID == reservation.Id))
+                                {
+                                    <tr>
+                                        <td>@meal.Meal.Name</td>
+                                        <td class="text-alignment">@meal.Amount</td>
+                                        <td class="text-alignment">@meal.Price CZK</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @section Styles {
     <style>
         .text-alignment {
             text-align: center;
         }
 
+        /* Dimmed styling for completed reservations */
+        .dimmed {
+            opacity: 0.6;
+        }
+
+            .dimmed td {
+                color: #aaa;
+            }
     </style>
 }

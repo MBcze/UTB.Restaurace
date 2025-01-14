@@ -26,7 +26,7 @@
     <!-- Reservation Date -->
     <div class="form-group">
         <label asp-for="Reservation.ReservationDate" class="control-label">Reservation Date</label>
-        <input asp-for="Reservation.ReservationDate" class="form-control" value="@today" />
+        <input asp-for="Reservation.ReservationDate" id="reservation-date" class="form-control" oninvalid="this.setCustomValidity('Please select a date that is today or later.')" oninput="this.setCustomValidity('')" value="@today" />
     </div>
 
     <!-- Categories -->
@@ -101,6 +101,24 @@
                     input.value = '';
                 }
             });
+        });
+
+        // Set the min attribute to today's date in YYYY-MM-DD format
+        window.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('reservation-date');
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const dd = String(today.getDate()).padStart(2, '0');
+
+            // Set the min value to today
+            const minDate = `${yyyy}-${mm}-${dd}`;
+            dateInput.setAttribute('min', minDate);
+
+            // Optional: If current value is less than minDate, clear it
+            if (dateInput.value <= minDate) {
+                dateInput.value = '';
+            }
         });
 
     </script>
