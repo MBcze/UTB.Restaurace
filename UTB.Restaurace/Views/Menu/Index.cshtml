@@ -4,9 +4,9 @@
     ViewData["Title"] = "Menu";
     var categoryDisplayNames = new Dictionary<string, string>
     {
-        { "polévka", "Polévky" },
-        { "hlavní jídlo", "Hlavní jídla" },
-        { "dezert", "Dezerty" }
+        { "polévka", "Soups" },
+        { "hlavní jídlo", "Main Courses" },
+        { "dezert", "Desserts" }
     };
 }
 
@@ -44,7 +44,7 @@
         var unavailableMeals = Model.Where(m => m.Category == category && !m.Available).OrderBy(m => m.Name).ToList();
         if (unavailableMeals.Any())
         {
-        <h2 style ="font-size: 44px; font-weight: 500">Nedostupná jídla</h2>
+            <h2 style="font-size: 44px; font-weight: 500">Items that are not available</h2>
         <div>
                 @foreach (var meal in unavailableMeals)
             {

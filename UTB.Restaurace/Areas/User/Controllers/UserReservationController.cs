@@ -39,6 +39,7 @@ namespace UTB.Restaurace.Areas.User.Controllers
                 Name = m.Name ?? string.Empty,
                 Description = m.Description ?? string.Empty,
                 Price = m.Price,
+                Category = m.Category,
                 Amount = 0,
                 IsSelected = false,
                 Image = m.ImageSrc
@@ -79,7 +80,7 @@ namespace UTB.Restaurace.Areas.User.Controllers
                     }).ToList();
 
                 _reservationAppService.AddReserveMeals(selectedMeals);
-                return RedirectToAction("Index", "Home", new { area = "" });
+                return RedirectToAction("UserReservations", "UserReservation", new { area = "User" });
             }
             //}
 

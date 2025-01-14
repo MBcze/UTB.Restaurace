@@ -70,9 +70,3 @@
 #logreg-forms #logreg-forms {
     display: none;
 }
-
-/* Input margin adjustment */
-#logreg-forms .form-signup input {
-    margin-bottom: 2px;
-}
-

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Drinks";
     var categoryDisplayNames = new Dictionary<string, string>
     {
-        { "nápoj", "Nápoje" },
+        { "nápoj", "Drinks" },
     };
 }
 
@@ -41,7 +41,7 @@
         var unavailableDrinks = Model.Where(d => d.Category == category && !d.Available).OrderBy(d => d.Name).ToList();
         if (unavailableDrinks.Any())
         {
-            <h2 style="font-size: 44px; font-weight: 500">Nedostupné Nápoje</h2>
+            <h2 style="font-size: 44px; font-weight: 500">Drinks that are not available</h2>
             <div>
                 @foreach (var drink in unavailableDrinks)
                 {

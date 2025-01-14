@@ -4,6 +4,16 @@
 
 @{
     ViewData["Title"] = "Create Reservation";
+    
+    // Map categories to titles
+    var categoryTitles = new Dictionary<string, string>
+    {
+        { "polévka", "Soups" },
+        { "hlavní jídlo", "Main Courses" },
+        { "dezert", "Desserts" },
+        { "nápoj", "Drinks" }
+    };
+
 
 
 
@@ -13,42 +23,203 @@
 <h2>Create Reservation</h2>
 
 <form asp-action="Create" method="post" enctype="multipart/form-data">
-
+    <!-- Reservation Date -->
     <div class="form-group">
-        <label asp-for="Reservation.ReservationDate" class="control-label"></label>
+        <label asp-for="Reservation.ReservationDate" class="control-label">Reservation Date</label>
         <input asp-for="Reservation.ReservationDate" class="form-control" value="@today" />
     </div>
-    <h3>Available Meals</h3>
-    <div class="d-flex flex-wrap">
-        @for (int i = 0; i < Model.AvailableMeals.Count; i++)
 
+    <!-- Categories -->
+    @foreach (var category in new[] { "polévka", "hlavní jídlo", "dezert", "nápoj" })
+    {
+            <h3>@categoryTitles[category]</h3>
 
+        <div class="d-flex flex-wrap">
+            @for (int i = 0; i < Model.AvailableMeals.Count; i++)
+            {
+                if (Model.AvailableMeals[i].Category == category)
+                {
+                    <div class="p-2" style="flex: 1 0 30%; max-width: 1620px;">
+                        <div class="meal-card">
+                            <div class="meal-image">
+                                <img src="@Model.AvailableMeals[i].Image" alt="@Model.AvailableMeals[i].Name">
+                            </div>
+                            <div class="meal-info">
+                                <div class="meal-name">@Model.AvailableMeals[i].Name</div>
+                                <div class="meal-description">@Model.AvailableMeals[i].Description</div>
+                                <div class="meal-price">@Model.AvailableMeals[i].Price CZK</div>
+                            </div>
 
-        {
-            <div class="p-2" style="flex: 1 0 30%;">
-                <div class="meal-card" style="width: 300px; height: 400px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #ccc; padding: 10px; box-sizing: border-box;">
-                    <div>
-                        <img src="@Model.AvailableMeals[i].Image" alt="@Model.AvailableMeals[i].Name" style="max-width: 100%; max-height: 150px; object-fit: cover;" />
+                            <div>
+                                <input type="hidden" asp-for="AvailableMeals[i].MealId" />
+                                <input type="hidden" asp-for="AvailableMeals[i].Name" />
+                                <input type="hidden" asp-for="AvailableMeals[i].Description" />
+                                <input type="hidden" asp-for="AvailableMeals[i].Price" />
+                                <input type="number" asp-for="AvailableMeals[i].Amount"
+                                       class="form-control meal-amount"
+                                       placeholder="Amount"
+                                       min="1" step="1" />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label>@Model.AvailableMeals[i].Name (@Model.AvailableMeals[i].Description) - @Model.AvailableMeals[i].Price Kč</label>
-                    </div>
-                    <div>
-                        <input type="hidden" asp-for="AvailableMeals[i].MealId" />
-                        <input type="hidden" asp-for="AvailableMeals[i].Name" />
-                        <input type="hidden" asp-for="AvailableMeals[i].Description" />
-                        <input type="hidden" asp-for="AvailableMeals[i].Price" />
-                        <input type="number" asp-for="AvailableMeals[i].Amount" class="form-control" placeholder="Amount" style="margin-top: auto;" />
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+                }
+            }
+        </div>
+    }
+
+    <!-- Submit Button -->
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
     </div>
 </form>
 
+
+
 @section Scripts {
     @* await Html.RenderPartialAsync("_ValidationScriptsPartial"); *@
+    <script>
+        document.querySelectorAll('.meal-amount').forEach(input => {
+            // Clear the value if it is 0 when the input loses focus
+            input.addEventListener('blur', function () {
+                if (this.value === '0') {
+                    this.value = '';
+                }
+            });
+
+            // Prevent the user from entering 0 manually
+            input.addEventListener('input', function () {
+                if (this.value === '0') {
+                    this.value = '';
+                }
+            });
+        });
+
+        // Clear pre-filled 0s from inputs with the class 'meal-amount' on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.meal-amount').forEach(input => {
+                if (input.value === '0') {
+                    input.value = '';
+                }
+            });
+        });
+
+    </script>
+
+}
+
+@section Styles {
+    <style>
+
+        /* Shared Styling */
+        form {
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .d-flex.gap-2 {
+            gap: 10px;
+        }
+
+        .meal-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 300px;
+            height: 450px;
+            border: 1px solid;
+            border-radius: 8px;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .meal-image img {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+        }
+
+        .meal-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .meal-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .meal-description {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
+        .meal-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .meal-amount {
+            margin-top: auto;
+            width: 100%;
+			text-align: center;
+        }
+
+        body.light-theme .meal-card {
+            background-color: #fff;
+            border-color: #ddd;
+            color: #333;
+        }
+
+            body.light-theme .meal-card:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        body.light-theme .meal-description {
+            color: #555;
+        }
+
+        body.light-theme .form-control {
+            background-color: #fff;
+            color: #333;
+            border-color: #ccc;
+        }
+
+
+        body.dark-theme .meal-card {
+            background-color: #333;
+            border-color: #444;
+            color: #dcdcdc;
+        }
+
+            body.dark-theme .meal-card:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            }
+
+        body.dark-theme .meal-description {
+            color: #a0a0a0;
+        }
+
+    </style>
 }

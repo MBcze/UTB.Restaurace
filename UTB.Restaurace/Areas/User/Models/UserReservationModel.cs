@@ -13,6 +13,7 @@ namespace UTB.Restaurace.Areas.User.Models
         public required string Name { get; set; }
         public required string Description { get; set; }
         public double Price { get; set; }
+        public string Category { get; set; }
         public bool IsSelected { get; set; }
         public int Amount { get; set; }
         public string Image { get; set; }

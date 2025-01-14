@@ -11,16 +11,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model[0].ReservationDate)
+                Reservation Date
+            </th>
+            <th class="text-alignment">
+                Total Price
+            </th>
+            <th class="text-alignment">
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Status)
-            </th>
-            <th>
-                Jídla
+                Items
             </th>
         </tr>
     </thead>
@@ -31,19 +31,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => reservation.ReservationDate)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => reservation.TotalPrice)
+                <td class="text-alignment">
+                    @Html.DisplayFor(modelItem => reservation.TotalPrice) CZK
                 </td>
-                <td>
+                <td class="text-alignment">
                     @Html.DisplayFor(modelItem => reservation.Status)
                 </td>
                 <td>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Meal</th>
-                                <th>Quantity</th>
-                                <th>CombinedPrice</th>
+                                <th style="width: 55%;">Meal</th>
+                                <th class="text-alignment">Quantity</th>
+                                <th class="text-alignment">Combined Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,8 +51,8 @@
                             {
                                 <tr>
                                     <td>@meal.Meal.Name</td>
-                                    <td>@meal.Amount</td>
-                                    <td>@meal.Price</td>
+                                    <td class="text-alignment">@meal.Amount</td>
+                                    <td class="text-alignment">@meal.Price CZK</td>
                                 </tr>
                             }
                         </tbody>
@@ -62,3 +62,12 @@
         }
     </tbody>
 </table>
+
+@section Styles {
+    <style>
+        .text-alignment {
+            text-align: center;
+        }
+
+    </style>
+}

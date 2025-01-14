@@ -2,10 +2,7 @@
 @{
     ViewData["Title"] = "Register";
 }
-@section Styles
-{
-    <link rel="stylesheet" href="~/css/login.css" />
-}
+
 <div id="logreg-forms">
     <form asp-action="Register" method="post" class="form-signup">
         <br />
@@ -40,7 +37,19 @@
         <a asp-action="Login" class="btn btn-success btn-block text-white" type="button" id="btn-signin"><i class="fas fa-sign-in-alt"></i> Sign in to Existing Account</a>
     </form>
 </div>
+
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/login.css" />
+    <style>
+        /* Input margin adjustment */
+        #logreg-forms .form-signup input {
+            margin-bottom: 10px;
+        }
+    </style>
 }
