@@ -64,7 +64,7 @@
             <tr>
                 <th>@reservation.Id</th>
                 <td>@reservation.ReservationCreationTime</td>
-                <td>@reservation.ReservationDate</td>
+                <td>@reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm")</td>
                 <td>@reservation.Status</td>
                 <td>@reservation.TotalPrice</td>
                 <td>@reservation.UserId</td>
@@ -118,7 +118,7 @@
                 <tr>
                     <th>@reservation.Id</th>
                     <td>@reservation.ReservationCreationTime</td>
-                    <td>@reservation.ReservationDate</td>
+                    <td>@reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm")</td>
                     <td>@reservation.Status</td>
                     <td>@reservation.TotalPrice</td>
                     <td>@reservation.UserId</td>
