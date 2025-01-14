@@ -42,13 +42,13 @@
         }
     }
     @if (unavailableMeals.Any()) {
-        <h2 style="font-size: 44px; font-weight: 500">Items that are not available</h2>
+        <h2 style="font-size: 44px; font-weight: 500; margin-top:100px;">Items that are not available</h2>
         @foreach (var category in categoryDisplayNames.Keys)
         {
             var unavailableMealsWithCat = Model.Where(m => m.Category == category && !m.Available).OrderBy(m => m.Name).ToList();
             if (unavailableMealsWithCat.Any())
             {
-                <h3 style="font-size: 36px; font-weight: 500; margin-top: 20px;">@categoryDisplayNames[category]</h3>
+                <h3 style="font-size: 36px; font-weight: 500; margin-top: 20px; color: gray;">@categoryDisplayNames[category]</h3>
                 <div>
                     @foreach (var meal in unavailableMealsWithCat)
                     {

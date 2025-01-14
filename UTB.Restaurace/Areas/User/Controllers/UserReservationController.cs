@@ -55,8 +55,6 @@ namespace UTB.Restaurace.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserReservationModel viewModel)
         {
-            //if (ModelState.IsValid)
-            //{
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -82,7 +80,6 @@ namespace UTB.Restaurace.Areas.User.Controllers
                 _reservationAppService.AddReserveMeals(selectedMeals);
                 return RedirectToAction("UserReservations", "UserReservation", new { area = "User" });
             }
-            //}
 
             // Pokud je model neplatný, vraťte stejný model zpět do view
             return View(viewModel);

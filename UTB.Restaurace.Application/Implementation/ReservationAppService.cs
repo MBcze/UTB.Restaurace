@@ -51,8 +51,6 @@ public class ReservationAppService : IReservationAppService
             existingReservation.ReservationDate = reservation.ReservationDate;
             existingReservation.Status = reservation.Status;
             existingReservation.TotalPrice = reservation.TotalPrice;
-            // existingReservation.CustomerName = reservation.CustomerName; // Example: include other fields
-            // existingReservation.NumberOfGuests = reservation.NumberOfGuests; // Example: include more fields if necessary
 
             _restauraceDbContext.SaveChanges(); // Ensure changes are saved
         }

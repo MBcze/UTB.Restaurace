@@ -18,8 +18,6 @@ namespace UTB.Restaurace.Domain.Entities
         public int MealId { get; set; }
         public Meal Meal { get; set; }
         public int Amount { get; set; }
-        //[Required]
         public double Price { get; set; }
-        //public Reservation? Reservation { get; set; }
     }
 }
